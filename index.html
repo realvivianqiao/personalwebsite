@@ -19,7 +19,8 @@
   color-scheme: light;
   --ink:#2A1E3A; --muted:#4A3F5C; --white:#FFFFFF; --yellow:#FFD54A; --pink:#FF8FB8;
   --wood:#8A5A3A; --woodtext:#FFF3D6; --dirt:#C98B5A;
-  --meadow:#A8E08F; --night:#2B2554; --library:#F0C27E; --tower:#C7CEEA; --mail:#FF9E80;
+  --meadow:#A8E08F; --night:#2B2554; --garden:#B8EBD6; --library:#F0C27E; --tower:#C7CEEA; --mail:#FF9E80;
+  --cave:#1B1428; --cavetop:#3A2A22; --tomb:#2E2442; --tombline:#0E0A16; --ghost:#CFC6FF;
   --sky1:#7FC8F8; --sky2:#94D2FA; --sky3:#AADCFB; --sky4:#C2E6FC; --sky5:#D9F0FD;
   --sun:#FFE27A; --halo:#FFF1B8; --city:#B5D2EE; --far:#9ED98F; --near:#7CCB6E; --grass:#4FAE5A;
   --treeD:#3E9A4F; --treeL:#5DBA62; --head:#2A1E3A; --headShadow:#FFFFFF;
@@ -200,6 +201,76 @@ footer .nap{display:flex;align-items:center;gap:12px}
 footer .zzz{color:#C9CCEA}
 footer .city{color:var(--yellow)}
 
+/* Hatch */
+.hatch{position:absolute;right:6%;bottom:82px;width:60px;line-height:0;display:block}
+.hatch svg{display:block;width:100%;height:auto}
+.hatch .q{position:absolute;left:50%;bottom:100%;transform:translate(-50%,-6px);font-family:var(--f-label);font-size:16px;line-height:1;color:var(--yellow);text-shadow:2px 2px 0 var(--ink)}
+.hatch:hover{transform:translateY(-3px)}
+
+/* Sprout garden */
+.garden{background:var(--garden)}
+.branch{flex:1.2 1 400px;min-width:0;border:4px solid var(--ink);background:#F4FBF7;padding:20px;display:flex;flex-direction:column}
+.branch .top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--f-label);font-size:11px;letter-spacing:.06em;color:var(--muted);padding-bottom:12px}
+.trunk{background:var(--white);border:3px solid var(--ink);padding:14px 16px;font-size:18px;line-height:1.55}
+.trunk mark{background:var(--yellow);color:var(--ink);padding:0 3px;box-shadow:0 0 0 2px var(--ink)}
+.vine{display:block;width:96px;height:auto;margin-left:28px}
+.leafcard{align-self:flex-end;width:min(100%,420px);background:#C9F2DE;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.leafcard span{font-family:var(--f-label);font-size:11px;letter-spacing:.06em;color:#1F5E43}
+.leafcard p{margin:0;font-size:17px;line-height:1.45}
+.leafrow{display:flex;align-items:center;gap:8px;padding-top:18px;font-family:var(--f-label);font-size:11px;letter-spacing:.06em;color:var(--muted)}
+.leafrow svg{width:20px;height:auto;fill:#4FAE5A}
+
+/* Underworld */
+.underworld{background:var(--cave);color:var(--white);overflow:hidden}
+.drip{height:8px}
+.drip.a{background:var(--cavetop)}
+.drip.b{background:repeating-linear-gradient(90deg,var(--cavetop) 0 32px,transparent 32px 64px)}
+.drip.c{background:repeating-linear-gradient(90deg,transparent 0 8px,var(--cavetop) 8px 24px,transparent 24px 64px)}
+.drip.d{background:repeating-linear-gradient(90deg,transparent 0 12px,var(--cavetop) 12px 20px,transparent 20px 64px)}
+.underworld>.wrap{padding-top:48px}
+.underworld .sign{background:#6B4FD8;color:var(--white);border-color:var(--white);box-shadow:4px 4px 0 #000}
+.underworld h2{color:var(--white)}
+.underworld .zone-head p{color:#D9D2F2;max-width:440px}
+.club{margin-top:18px;display:flex;flex-wrap:wrap;gap:28px;align-items:stretch}
+.stage{flex:1.3 1 420px;min-width:0;position:relative;min-height:320px;border:4px solid #000;background:#120D1C;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.laser{position:absolute;top:-10px;width:6px;height:150%;opacity:.3;transform-origin:top center}
+.laser.l1{left:14%;background:#FF5A8A;transform:rotate(-28deg)}
+.laser.l2{left:36%;background:#7CF5D2;transform:rotate(16deg)}
+.laser.l3{right:34%;background:#FFD54A;transform:rotate(-14deg)}
+.laser.l4{right:12%;background:#8E7CF0;transform:rotate(30deg)}
+.disco{position:absolute;left:50%;top:0;transform:translateX(-50%);width:54px;height:auto}
+.dancers{position:relative;z-index:1;display:flex;justify-content:space-around;align-items:flex-end;padding:0 6%}
+.dancer{width:clamp(56px,6vw,84px)}
+.dancer.d1 .pet{color:var(--ghost)}
+.dancer.d3 .pet{color:#FFD3B5}
+.floor{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(2,32px);border-top:4px solid #000}
+.floor i{border:1px solid #000;background:#2E2442}
+.floor i:nth-child(3n){background:#3B2F57}
+.player{flex:1 1 320px;min-width:0;background:var(--tomb);border:4px solid #000;box-shadow:8px 8px 0 #000;padding:24px;display:flex;flex-direction:column;gap:14px}
+.player .top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--f-label);font-size:12px;letter-spacing:.06em}
+.player .live{color:#FF8FB8}
+.player h3{margin:0;font-weight:700;font-size:clamp(40px,4.4vw,56px);line-height:1}
+.player p{margin:0;font-size:18px;color:#D9D2F2}
+.eq{display:flex;align-items:flex-end;gap:5px;height:60px}
+.eq i{flex:1;background:#7CF5D2}
+.eq i:nth-child(odd){background:#FF8FB8}
+.player .textlink{color:var(--white)}
+.up{align-self:flex-start;margin-top:12px}
+.raving .laser{opacity:.65;animation:sweep 2.4s steps(12) infinite alternate}
+.raving .laser.l2,.raving .laser.l4{animation-duration:1.8s;animation-direction:alternate-reverse}
+@keyframes sweep{from{transform:rotate(-30deg)}to{transform:rotate(30deg)}}
+.raving .floor i{animation:tile 1.2s steps(1) infinite}
+.raving .floor i:nth-child(3n+1){animation-delay:-.4s}
+.raving .floor i:nth-child(3n+2){animation-delay:-.8s}
+@keyframes tile{0%{background:#FF5A8A}33%{background:#7CF5D2}66%{background:#FFD54A}}
+.raving .dancer{animation:dance .5s steps(2) infinite}
+.raving .dancer.d2{animation-delay:-.25s}
+@keyframes dance{0%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14%) rotate(6deg)}}
+.raving .eq i{animation:eq .6s steps(4) infinite alternate}
+.raving .eq i:nth-child(2n){animation-delay:-.2s}
+.raving .eq i:nth-child(3n){animation-delay:-.4s}
+@keyframes eq{from{height:15%}to{height:100%}}
+
 /* Motion */
 .cloud1{animation:drift 24s steps(24) infinite alternate}
 .cloud2{animation:drift2 30s steps(30) infinite alternate}
@@ -216,7 +287,7 @@ footer .city{color:var(--yellow)}
 @keyframes blink{50%{opacity:0}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .cloud1,.cloud2,.pet-walk,.bob,.hop,.blink,.twinkle{animation:none}
+  .cloud1,.cloud2,.pet-walk,.bob,.hop,.blink,.twinkle,.raving .laser,.raving .floor i,.raving .dancer,.raving .eq i{animation:none}
   .btn:hover,.btn:active{transform:none}
 }
 @media (max-width:600px){
@@ -235,6 +306,7 @@ footer .city{color:var(--yellow)}
     <path fill="#2A1E3A" d="M2 0h2v1h-2z M12 0h2v1h-2z M1 1h1v2h-1z M4 1h1v1h-1z M11 1h1v1h-1z M14 1h1v2h-1z M5 2h6v1h-6z M0 3h1v5h-1z M15 3h1v5h-1z M4 4h1v2h-1z M11 4h1v2h-1z M7 6h2v1h-2z M1 8h1v1h-1z M14 8h1v1h-1z M2 9h1v1h-1z M5 9h6v1h-6z M13 9h1v1h-1z M3 10h2v1h-2z M11 10h2v1h-2z"/>
   </symbol>
   <symbol id="star" viewBox="0 0 5 5"><path d="M2 0h1v5h-1z M0 2h5v1h-5z"/></symbol>
+  <symbol id="leaf" viewBox="0 0 6 6"><path d="M2 0h4v1h-4z M1 1h5v2h-5z M0 3h5v1h-5z M0 4h3v1h-3z M0 5h1v1h-1z"/></symbol>
 </svg>
 
 <header class="hud">
@@ -250,6 +322,7 @@ footer .city{color:var(--yellow)}
     <nav aria-label="Zones">
       <a href="#meadow">BOOP</a>
       <a href="#dreams">ODO</a>
+      <a href="#garden">SPROUT</a>
       <a href="#library">STORIES</a>
       <a href="#tower">WORK</a>
       <a href="#mailbox">MAIL</a>
@@ -299,6 +372,11 @@ footer .city{color:var(--yellow)}
         <p class="kicker after zh" lang="zh-Hans">的秘密领地</p>
       </div>
     </div>
+
+    <a class="hatch" href="#underworld" aria-label="A trapdoor. Where does it go?">
+      <span class="q blink" aria-hidden="true">?</span>
+      <svg class="crisp" viewBox="0 0 12 7" aria-hidden="true"><path fill="#8A5A3A" d="M1 1h10v5h-10z"/><path fill="#6B4429" d="M4 1h1v5h-1z M7 1h1v5h-1z"/><path fill="#2A1E3A" d="M0 0h12v1h-12z M0 6h12v1h-12z M0 0h1v7h-1z M11 0h1v7h-1z"/><path fill="#FFD54A" d="M5 3h2v1h-2z"/></svg>
+    </a>
 
     <div class="pet-walk">
       <div>
@@ -405,11 +483,51 @@ footer .city{color:var(--yellow)}
   </div>
 </section>
 
+<section class="zone garden" id="garden">
+  <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--night) 0 24px,var(--garden) 24px 48px)"></div>
+  <div class="wrap">
+    <span class="sign">ZONE 3</span>
+    <div class="zone-head">
+      <h2>Sprout Garden</h2>
+      <p>Where questions grow branches. Sprout is the learning tool I built for myself.</p>
+    </div>
+    <div class="panel project">
+      <div class="text">
+        <div class="chips">
+          <span class="chip" style="background:var(--yellow)">▲ PLAYABLE</span>
+          <span class="chip">BOOKS</span>
+          <span class="chip">PDFS</span>
+          <span class="chip">PHOTOS</span>
+        </div>
+        <h3>Sprout</h3>
+        <p class="tag">Learn anything by branching off.</p>
+        <p class="desc">Read a book, a PDF or any topic. Highlight a phrase you don't get and a side branch grows to explain it, then folds back into the main thread. Every branch you explore becomes a leaf in your garden.</p>
+        <div class="links">
+          <a class="btn" href="https://claude.ai/artifact/6CxyiYwrFtQfvTWgEQFqNS">OPEN SPROUT ▶</a>
+        </div>
+      </div>
+      <div class="branch">
+        <div class="top"><span>MAIN THREAD</span><span>EXAMPLE</span></div>
+        <p class="trunk" style="margin:0">The Fed raised interest rates to <mark>cool inflation</mark>, and mortgage costs followed.</p>
+        <svg class="vine crisp" viewBox="0 0 16 8" aria-hidden="true"><path fill="#4FAE5A" d="M2 0h2v8h-2z M4 6h10v2h-10z M6 2h3v2h-3z M8 1h2v2h-2z M10 3h3v2h-3z M12 2h2v2h-2z"/></svg>
+        <div class="leafcard">
+          <span>NEW LEAF</span>
+          <p>Higher rates make borrowing pricier, so people and companies spend less and prices calm down.</p>
+        </div>
+        <div class="leafrow" aria-hidden="true">
+          <svg class="crisp"><use href="#leaf"/></svg><svg class="crisp"><use href="#leaf"/></svg><svg class="crisp"><use href="#leaf"/></svg><svg class="crisp"><use href="#leaf"/></svg>
+          <span>YOUR GARDEN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="zone library" id="library">
-  <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--night) 0 24px,var(--library) 24px 48px)"></div>
+  <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--garden) 0 24px,var(--library) 24px 48px)"></div>
   <div class="wrap">
     <div class="col">
-      <span class="sign">ZONE 3</span>
+      <span class="sign">ZONE 4</span>
       <h2>Story Library</h2>
       <p>I write fiction under a pen name, SaltyMalty. The book on the desk right now is Shadows of Upper East, a novel told through several characters living in New York.</p>
       <p class="label" style="font-size:13px">EXCERPTS COMING SOON</p>
@@ -442,7 +560,7 @@ footer .city{color:var(--yellow)}
 <section class="zone tower" id="tower">
   <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--library) 0 24px,var(--tower) 24px 48px)"></div>
   <div class="wrap">
-    <span class="sign">ZONE 4</span>
+    <span class="sign">ZONE 5</span>
     <div class="zone-head">
       <h2>Day Job Tower</h2>
       <p>Where I go while the pets are napping.</p>
@@ -485,7 +603,7 @@ footer .city{color:var(--yellow)}
   <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--tower) 0 24px,var(--mail) 24px 48px)"></div>
   <div class="wrap">
     <div class="col">
-      <span class="sign">ZONE 5</span>
+      <span class="sign">ZONE 6</span>
       <h2>Say hi!</h2>
       <p>Letters welcome, pixel or otherwise.</p>
       <div class="panel letter">
@@ -506,6 +624,44 @@ footer .city{color:var(--yellow)}
         <path fill="#FFFFFF" d="M9 6h6v2h-6z"/>
       </svg>
     </div>
+  </div>
+</section>
+
+<section class="zone underworld" id="underworld">
+  <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--mail) 0 24px,var(--cavetop) 24px 48px)"></div>
+  <div class="drip a" aria-hidden="true"></div>
+  <div class="drip b" aria-hidden="true"></div>
+  <div class="drip c" aria-hidden="true"></div>
+  <div class="drip d" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="sign">LEVEL B1</span>
+    <div class="zone-head">
+      <h2>The Underworld</h2>
+      <p>You found the trapdoor. Down here it's electronic music, and mostly it's Underworld.</p>
+    </div>
+    <div class="club">
+      <div class="stage" aria-hidden="true">
+        <i class="laser l1"></i><i class="laser l2"></i><i class="laser l3"></i><i class="laser l4"></i>
+        <svg class="disco crisp" viewBox="0 0 9 10"><path fill="#8E84B0" d="M4 0h1v2h-1z"/><path fill="#C9CCEA" d="M3 2h3v1h-3z M2 3h5v1h-5z M1 4h7v3h-7z M2 7h5v1h-5z M3 8h3v1h-3z"/><path fill="#FFFFFF" d="M2 4h1v1h-1z M5 5h1v1h-1z M3 6h1v1h-1z M6 3h1v1h-1z"/><path fill="#6E6690" d="M4 4h1v1h-1z M6 6h1v1h-1z M2 6h1v1h-1z M4 8h1v1h-1z"/></svg>
+        <div class="dancers">
+          <div class="dancer d1"><svg class="pet crisp" viewBox="0 0 16 11"><use href="#pet"/></svg></div>
+          <div class="dancer d2"><svg class="pet crisp" viewBox="0 0 16 11"><use href="#pet"/></svg></div>
+          <div class="dancer d3"><svg class="pet crisp" viewBox="0 0 16 11"><use href="#pet"/></svg></div>
+        </div>
+        <div class="floor"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="player">
+        <div class="top"><span>NOW PLAYING</span><span class="live blink">● LIVE</span></div>
+        <h3>Underworld</h3>
+        <p>On repeat, all the way down here.</p>
+        <div class="eq" aria-hidden="true"><i style="height:40%"></i><i style="height:70%"></i><i style="height:55%"></i><i style="height:90%"></i><i style="height:35%"></i><i style="height:65%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:60%"></i><i style="height:30%"></i><i style="height:75%"></i><i style="height:50%"></i><i style="height:85%"></i><i style="height:40%"></i></div>
+        <div class="links" style="padding-top:4px">
+          <button type="button" class="btn" id="rave" aria-pressed="false">▶ START THE RAVE</button>
+          <a class="textlink" href="https://underworldlive.com">UNDERWORLDLIVE.COM ↗</a>
+        </div>
+      </div>
+    </div>
+    <a class="btn plain up" href="#top">CLIMB BACK UP ▲</a>
   </div>
 </section>
 </main>
@@ -539,12 +695,12 @@ footer .city{color:var(--yellow)}
     en: [
       "Aha! You've entered the secret land of Vivian Qiao.",
       "By day she helps a hedge fund in New York manage risk better. By night she vibe codes tiny software. Like me!",
-      "She also writes stories. Wander around, nothing here breaks. And boop me anytime."
+      "She also writes stories. Wander around, nothing here breaks. Psst, there's a trapdoor somewhere."
     ],
     zh: [
       "啊哈！你误入了 Vivian Qiao 的秘密领地。",
       "她白天帮纽约一家对冲基金把风险管得更好，晚上 vibe code 一些小软件，比如我。",
-      "她还写小说。随便逛逛吧，这里什么都不会坏。想 boop 我就 boop！"
+      "她还写小说。随便逛逛吧，这里什么都不会坏。嘘，这里藏着一扇暗门。"
     ]
   };
   var SPEAKERS = { en: ["???", "BOOP PET", "BOOP PET"], zh: ["???", "BOOP 小宠物", "BOOP 小宠物"] };
@@ -573,6 +729,15 @@ footer .city{color:var(--yellow)}
   buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.setLang); }); });
   document.getElementById("next").addEventListener("click", function () { step = (step + 1) % 3; renderDialog(); });
   setLang(lang === "zh" ? "zh" : "en");
+
+  // Rave
+  var rave = document.getElementById("rave");
+  var cave = document.getElementById("underworld");
+  rave.addEventListener("click", function () {
+    var on = cave.classList.toggle("raving");
+    rave.setAttribute("aria-pressed", String(on));
+    rave.textContent = on ? "■ LIGHTS UP" : "▶ START THE RAVE";
+  });
 
   // Boop
   var boops = 0;
