@@ -823,7 +823,7 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 
   // ---------- music: Spotify embed, played from the Underworld player ----------
   // Paste any Spotify link here: a playlist, album, artist or track.
-  var MUSIC = 'https://open.spotify.com/artist/1PXHzxRDiLnjqNrRn2Xbsa';
+  var MUSIC = 'https://open.spotify.com/playlist/0MshIG4kTAKVFDhHv0mtGg';
 
   var player = document.querySelector('.pv-uw');
   var playBtn = document.querySelector('.uw-play');
@@ -843,7 +843,7 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
     loading = true;
     window.onSpotifyIframeApiReady = function (IFrameAPI) {
       IFrameAPI.createController(document.getElementById('spotify-embed'),
-        { uri: toUri(MUSIC), width: '100%', height: 152 },
+        { uri: toUri(MUSIC), width: '100%', height: 352 },
         function (c) {
           controller = c;
           c.addListener('ready', function () {
