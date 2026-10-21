@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-time="day">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vivian Qiao</title>
+<meta name="description" content="Aha! You've entered the secret land of Vivian Qiao. Engineer in New York, maker of Boop, writer of stories.">
+<meta property="og:title" content="The Secret Land of Vivian Qiao">
+<meta property="og:description" content="Engineer in New York, maker of Boop, writer of stories.">
+<meta property="og:url" content="https://vivianqiao.com">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#2A1E3A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -3 16 16' shape-rendering='crispEdges'%3E%3Cpath fill='%23fff' d='M2 1h2v1H2zM12 1h2v1h-2zM2 2h12v1H2zM1 3h14v5H1zM2 8h12v1H2zM3 9h10v1H3z'/%3E%3Cpath fill='%23FF8FB8' d='M2 6h2v1H2zM12 6h2v1h-2z'/%3E%3Cpath fill='%232A1E3A' d='M2 0h2v1H2zM12 0h2v1h-2zM1 1h1v2H1zM4 1h1v1H4zM11 1h1v1h-1zM14 1h1v2h-1zM5 2h6v1H5zM0 3h1v5H0zM15 3h1v5h-1zM4 4h1v2H4zM11 4h1v2h-1zM7 6h2v1H7zM1 8h1v1H1zM14 8h1v1h-1zM2 9h1v1H2zM5 9h6v1H5zM13 9h1v1h-1zM3 10h2v1H3zM11 10h2v1h-2z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Silkscreen:wght@400;700&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ink:#2A1E3A; --muted:#4A3F5C; --white:#FFFFFF; --yellow:#FFD54A; --pink:#FF8FB8;
+  --wood:#8A5A3A; --woodtext:#FFF3D6; --dirt:#C98B5A;
+  --meadow:#A8E08F; --night:#2B2554; --library:#F0C27E; --tower:#C7CEEA; --mail:#FF9E80;
+  --sky1:#7FC8F8; --sky2:#94D2FA; --sky3:#AADCFB; --sky4:#C2E6FC; --sky5:#D9F0FD;
+  --sun:#FFE27A; --halo:#FFF1B8; --city:#B5D2EE; --far:#9ED98F; --near:#7CCB6E; --grass:#4FAE5A;
+  --treeD:#3E9A4F; --treeL:#5DBA62; --head:#2A1E3A; --headShadow:#FFFFFF;
+  --f-pixel:'Pixelify Sans','PingFang SC','Noto Sans SC',system-ui,sans-serif;
+  --f-label:'Silkscreen','Pixelify Sans',ui-monospace,monospace;
+}
+[data-time="sunset"]{
+  --sky1:#5B4B9A; --sky2:#8E5FAE; --sky3:#D9739A; --sky4:#F59A7E; --sky5:#FFC48A;
+  --sun:#FFE7A3; --halo:#FFD3A0; --city:#B97A9C; --far:#A9B887; --near:#8EAE6A; --grass:#5E9A52;
+  --treeD:#4E7F46; --treeL:#6C9A58; --head:#FFFFFF; --headShadow:#2A1E3A;
+}
+[data-time="night"]{
+  --sky1:#151A3D; --sky2:#1D2350; --sky3:#262D62; --sky4:#303873; --sky5:#3B4384;
+  --sun:#F4EBC9; --halo:#4A5290; --city:#4A5290; --far:#3E5F63; --near:#355A4E; --grass:#2C4D3F;
+  --treeD:#24443A; --treeL:#2F5A48; --head:#FFFFFF; --headShadow:#2A1E3A;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--ink)}
+body{margin:0;background:var(--ink);color:var(--ink);font-family:var(--f-pixel);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:var(--ink)}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+[data-lang="en"] .zh,[data-lang="zh"] .en{display:none!important}
+
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--f-label);letter-spacing:.06em}
+.crisp{shape-rendering:crispEdges}
+
+/* HUD */
+.hud{background:var(--ink);color:var(--white);font-family:var(--f-label);padding-top:env(safe-area-inset-top,0px)}
+.hud .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 28px;padding-block:6px}
+.hud a{color:var(--white);text-decoration:none}
+.hud a:hover{color:var(--yellow)}
+.hud .home{display:flex;align-items:center;gap:10px;font-size:15px;letter-spacing:.04em;padding-block:10px}
+.hud .stats{display:flex;align-items:center;gap:18px;font-size:13px;letter-spacing:.06em}
+.hud .hearts{color:var(--pink);letter-spacing:.12em}
+.hud .boops{font-variant-numeric:tabular-nums}
+.hud nav{display:flex;flex-wrap:wrap;gap:0 18px;font-size:12px;letter-spacing:.06em}
+.hud nav a{padding-block:14px}
+.lang{display:flex;border:2px solid var(--white)}
+.lang button{border:0;padding:12px;cursor:pointer;background:transparent;color:var(--white);font-family:var(--f-label);font-size:12px;letter-spacing:.06em}
+.lang button[lang]{font-family:'PingFang SC','Noto Sans SC',sans-serif;font-size:13px}
+.lang button[aria-pressed="true"]{background:var(--yellow);color:var(--ink)}
+
+/* Hero */
+.hero{background:var(--dirt)}
+.scene{position:relative;aspect-ratio:320/150;min-height:560px;max-width:100%;overflow:hidden}
+.scene>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.s1{fill:var(--sky1)}.s2{fill:var(--sky2)}.s3{fill:var(--sky3)}.s4{fill:var(--sky4)}.s5{fill:var(--sky5)}
+.sun{fill:var(--sun)}.halo{fill:var(--halo)}.city{fill:var(--city)}.far{fill:var(--far)}.near{fill:var(--near)}.grass{fill:var(--grass)}.treeD{fill:var(--treeD)}.treeL{fill:var(--treeL)}
+.headline{position:absolute;inset:0 0 auto 0}
+.headline .wrap{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-top:clamp(32px,5vw,72px)}
+.aha{display:inline-block;font-family:var(--f-label);font-size:clamp(14px,1.6vw,20px);background:var(--yellow);color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:6px 12px;transform:rotate(-4deg)}
+.aha.zh{font-family:'PingFang SC','Noto Sans SC',sans-serif;font-weight:700}
+.kicker{margin:8px 0 0;font-size:clamp(20px,2.6vw,36px);font-weight:500;line-height:1.2;color:var(--head);text-shadow:3px 3px 0 var(--headShadow)}
+.kicker.zh{font-weight:700}
+.kicker.after{margin:0}
+h1{margin:0;font-weight:700;font-size:clamp(60px,11vw,168px);line-height:.9;letter-spacing:.01em;color:var(--head);text-shadow:.045em .045em 0 var(--headShadow)}
+
+.pet-walk{position:absolute;left:14%;bottom:20%;width:clamp(72px,7.5vw,116px)}
+.pet-walk>div{position:relative}
+.pet-btn{display:block;width:100%;background:none;border:0;padding:0;cursor:pointer;line-height:0}
+.pet{display:block;width:100%;height:auto;color:var(--white)}
+.bubble{position:absolute;left:50%;bottom:100%;transform:translate(-50%,-10px);font-family:var(--f-label);font-size:15px;line-height:1;white-space:nowrap;background:var(--white);color:var(--ink);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:7px 10px}
+
+.dialog-wrap{margin-top:-76px;padding-bottom:48px;position:relative}
+.dialog{position:relative;max-width:880px;margin:0 auto;background:var(--white);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:30px 28px 18px;display:flex;flex-direction:column;gap:14px}
+.speaker{position:absolute;top:-18px;left:20px;font-family:var(--f-label),'PingFang SC',sans-serif;font-size:12px;letter-spacing:.06em;background:var(--yellow);border:3px solid var(--ink);padding:5px 10px}
+.dialog p{margin:0;font-size:clamp(19px,2vw,25px);line-height:1.45;min-height:2.9em;text-wrap:pretty}
+.dialog .row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.dialog .count{font-family:var(--f-label);font-size:12px;letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums}
+.dialog .count span{margin-left:12px;color:var(--ink)}
+
+/* Buttons and chips */
+.btn{display:inline-block;font-family:var(--f-label),'PingFang SC',sans-serif;font-size:13px;letter-spacing:.06em;text-decoration:none;color:var(--ink);background:var(--yellow);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:12px 16px;cursor:pointer}
+.btn.dark{background:var(--ink);color:var(--white);box-shadow:4px 4px 0 var(--pink)}
+.btn.plain{background:var(--white)}
+.btn:hover{transform:translate(-2px,-2px)}
+.btn:active{transform:translate(3px,3px)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--f-label);font-size:12px;letter-spacing:.06em;background:var(--white);border:2px solid var(--ink);padding:4px 8px}
+
+/* Zones */
+.zone{position:relative}
+.edge{height:12px}
+.zone>.wrap{position:relative;padding-block:64px 88px;display:flex;flex-direction:column;gap:22px}
+.sign{align-self:flex-start;font-family:var(--f-label);font-size:13px;letter-spacing:.08em;background:var(--wood);color:var(--woodtext);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:7px 12px}
+.zone-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 32px}
+h2{margin:0;font-weight:700;font-size:clamp(40px,5.6vw,72px);line-height:1;text-wrap:balance}
+.zone-head p{margin:0;max-width:400px;font-size:18px}
+.panel{background:var(--white);color:var(--ink);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.project{margin-top:14px;padding:28px;display:flex;flex-wrap:wrap;gap:32px}
+.project .text{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.project h3{margin:0;font-weight:700;font-size:52px;line-height:1}
+.project .tag{margin:0;font-size:24px;font-weight:600;line-height:1.25}
+.project .desc{margin:0;font-size:18px;line-height:1.55;color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-top:6px}
+.textlink{font-family:var(--f-label);font-size:13px;letter-spacing:.04em;padding-block:14px}
+
+/* Boop window */
+.window{flex:1.3 1 420px;min-width:0;border:4px solid var(--ink);background:#EAF4FF}
+.window .bar{background:var(--ink);color:var(--white);font-family:var(--f-label);font-size:11px;letter-spacing:.06em;padding:8px 12px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px}
+.desk{position:relative;height:260px;background-color:#EAF4FF;background-image:radial-gradient(#C5D9F0 1.5px,transparent 1.5px);background-size:16px 16px;overflow:hidden}
+.desk .table{position:absolute;left:0;right:0;bottom:0;height:36px;background:#B9814F;border-top:4px solid var(--ink)}
+.desk .pa,.desk .pb{position:absolute;bottom:36px;width:110px}
+.desk .pa{left:12%}
+.desk .pb{right:12%;animation-delay:-.6s}
+.desk .pb .pet{color:#FFD3B5}
+.desk .say{position:absolute;left:50%;top:56px;transform:translateX(-50%);font-family:var(--f-label);font-size:16px;line-height:1;background:var(--white);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:8px 12px}
+.desk .heart{position:absolute;right:22%;top:40px;width:35px;height:auto}
+
+/* Dream clouds */
+.dreams{background:var(--night);color:var(--white);overflow:hidden}
+.dreams .sign{border-color:var(--white);box-shadow:4px 4px 0 #000}
+.dreams .zone-head{padding-right:96px}
+.dreams .zone-head p{color:#D9DBF2}
+.dreams .panel{box-shadow:8px 8px 0 #000}
+.star{position:absolute;height:auto}
+.moon{position:absolute;right:7%;top:64px;width:80px;height:auto}
+.dreamlog{flex:1 1 320px;min-width:0;background:var(--night);color:var(--white);border:4px solid var(--ink);padding:20px;display:flex;flex-direction:column;gap:16px}
+.dreamlog .top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--f-label);font-size:11px;letter-spacing:.06em}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;font-family:var(--f-label);font-size:11px;color:#C9CCEA;text-align:center}
+.week div{display:flex;flex-direction:column;gap:6px}
+.week i{aspect-ratio:1;max-width:100%;border:2px solid #5B5F99}
+.week i.on{background:#8E7CF0;border-color:var(--white)}
+.week i.best{background:#FFE27A;border-color:var(--white)}
+.entry{border-top:2px dashed #5B5F99;padding-top:14px;display:flex;flex-direction:column;gap:6px}
+.entry span{font-family:var(--f-label);font-size:11px;letter-spacing:.06em;color:#FFE27A}
+.entry p{margin:0;font-size:18px;line-height:1.45}
+
+/* Library */
+.library{background:var(--library)}
+.library>.wrap{flex-direction:row;flex-wrap:wrap;align-items:center;gap:48px}
+.library .col{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:22px}
+.library .col p{margin:0;max-width:520px;font-size:20px;line-height:1.5}
+.shelf{display:block;width:100%;max-width:400px;height:auto;margin-top:8px}
+.ms-col{flex:1 1 340px;max-width:430px;min-width:0}
+.manuscript{position:relative;aspect-ratio:8.5/11;max-width:100%;padding:48px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;transform:rotate(1.5deg);box-shadow:10px 10px 0 var(--ink)}
+.manuscript .stamp{position:absolute;top:26px;right:22px;font-family:var(--f-label);font-size:13px;letter-spacing:.12em;color:#D6336C;border:3px solid #D6336C;padding:4px 10px;transform:rotate(8deg)}
+.manuscript .title{margin:0;font-family:var(--f-label);font-size:clamp(18px,2vw,24px);letter-spacing:.08em;line-height:1.4}
+.manuscript p{margin:0;font-size:18px}
+.manuscript .foot{position:absolute;left:0;right:0;bottom:26px;font-family:var(--f-label);font-size:11px;letter-spacing:.1em;color:var(--muted)}
+
+/* Tower */
+.tower{background:var(--tower)}
+.quest{margin-top:14px;padding:24px 28px 8px}
+.quest .top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--f-label);font-size:13px;letter-spacing:.08em;padding-bottom:16px}
+.quest ul{list-style:none;margin:0;padding:0}
+.quest li{display:flex;flex-wrap:wrap;gap:10px 28px;padding-block:22px;border-top:3px dashed var(--ink)}
+.quest .when{flex:0 0 160px;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.status{font-family:var(--f-label);font-size:11px;letter-spacing:.06em;border:2px solid var(--ink);padding:3px 7px;background:#BFE8B0}
+.status.now{background:var(--yellow)}
+.years{font-family:var(--f-label);font-size:12px;letter-spacing:.04em;color:var(--muted);font-variant-numeric:tabular-nums}
+.quest .who{flex:1 1 240px;min-width:0}
+.quest h3{margin:0;font-weight:700;font-size:28px;line-height:1.15}
+.quest .who p{margin:4px 0 0;font-size:17px;color:var(--muted)}
+.quest .what{flex:2 1 320px;min-width:0;margin:0;font-size:18px;line-height:1.55}
+.inventory{margin-top:18px;padding:24px 28px;display:flex;flex-direction:column;gap:18px}
+.inventory .top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--f-label);font-size:13px;letter-spacing:.08em}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;font-family:var(--f-label);font-size:12px;letter-spacing:.04em;text-align:center}
+.slots span{background:#F1EEF6;border:3px solid var(--ink);padding:16px 6px}
+.slots span.gold{background:var(--yellow)}
+
+/* Mailbox */
+.mail{background:var(--mail)}
+.mail>.wrap{flex-direction:row;flex-wrap:wrap;align-items:flex-end;gap:40px;padding-bottom:96px}
+.mail .col{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:22px}
+.mail h2{font-size:clamp(48px,8vw,112px);line-height:.95}
+.mail .col>p{margin:0;font-size:20px}
+.letter{padding:24px 28px;display:flex;flex-direction:column;gap:18px}
+.email{font-weight:700;font-size:clamp(24px,3.4vw,42px);line-height:1.1;overflow-wrap:anywhere;text-decoration-thickness:3px;text-underline-offset:6px}
+.mailbox{flex:0 1 200px;min-width:0;display:flex;justify-content:center}
+.mailbox svg{display:block;width:100%;max-width:190px;height:auto}
+
+footer{background:var(--ink);color:var(--white)}
+footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-block:22px calc(22px + env(safe-area-inset-bottom,0px));font-family:var(--f-label);font-size:12px;letter-spacing:.06em}
+footer .nap{display:flex;align-items:center;gap:12px}
+footer .zzz{color:#C9CCEA}
+footer .city{color:var(--yellow)}
+
+/* Motion */
+.cloud1{animation:drift 24s steps(24) infinite alternate}
+.cloud2{animation:drift2 30s steps(30) infinite alternate}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(24px)}}
+@keyframes drift2{from{transform:translateX(0)}to{transform:translateX(-30px)}}
+.pet-walk{animation:wander 18s steps(36) infinite alternate}
+@keyframes wander{from{transform:translateX(0)}to{transform:translateX(300%)}}
+.bob{animation:bob 1.2s steps(1) infinite}
+@keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-6%)}}
+.hop{animation:hop .5s steps(5) 1,bob 1.2s steps(1) .5s infinite}
+@keyframes hop{0%,100%{transform:translateY(0)}45%{transform:translateY(-45%)}}
+.blink{animation:blink 1s steps(1) infinite}
+.twinkle{animation:blink 1.8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .cloud1,.cloud2,.pet-walk,.bob,.hop,.blink,.twinkle{animation:none}
+  .btn:hover,.btn:active{transform:none}
+}
+@media (max-width:600px){
+  .dreams .zone-head{padding-right:0}
+  .moon{width:56px;top:40px}
+  .project{padding:20px}
+  .project h3{font-size:44px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="pet" viewBox="0 0 16 11">
+    <path fill="currentColor" d="M2 1h2v1h-2z M12 1h2v1h-2z M2 2h12v1h-12z M1 3h14v5h-14z M2 8h12v1h-12z M3 9h10v1h-10z"/>
+    <path fill="#FF8FB8" d="M2 6h2v1h-2z M12 6h2v1h-2z"/>
+    <path fill="#2A1E3A" d="M2 0h2v1h-2z M12 0h2v1h-2z M1 1h1v2h-1z M4 1h1v1h-1z M11 1h1v1h-1z M14 1h1v2h-1z M5 2h6v1h-6z M0 3h1v5h-1z M15 3h1v5h-1z M4 4h1v2h-1z M11 4h1v2h-1z M7 6h2v1h-2z M1 8h1v1h-1z M14 8h1v1h-1z M2 9h1v1h-1z M5 9h6v1h-6z M13 9h1v1h-1z M3 10h2v1h-2z M11 10h2v1h-2z"/>
+  </symbol>
+  <symbol id="star" viewBox="0 0 5 5"><path d="M2 0h1v5h-1z M0 2h5v1h-5z"/></symbol>
+</svg>
+
+<header class="hud">
+  <div class="wrap">
+    <a class="home" href="#top">
+      <svg class="crisp" viewBox="0 0 16 11" width="28" aria-hidden="true"><path fill="#FFFFFF" d="M2 1h2v1h-2z M12 1h2v1h-2z M2 2h12v1h-12z M1 3h14v5h-14z M2 8h12v1h-12z M3 9h10v1h-10z"/><path fill="#FF8FB8" d="M2 6h2v1h-2z M12 6h2v1h-2z"/><path fill="#FFD54A" d="M2 0h2v1h-2z M12 0h2v1h-2z M1 1h1v2h-1z M4 1h1v1h-1z M11 1h1v1h-1z M14 1h1v2h-1z M5 2h6v1h-6z M0 3h1v5h-1z M15 3h1v5h-1z M4 4h1v2h-1z M11 4h1v2h-1z M7 6h2v1h-2z M1 8h1v1h-1z M14 8h1v1h-1z M2 9h1v1h-1z M5 9h6v1h-6z M13 9h1v1h-1z M3 10h2v1h-2z M11 10h2v1h-2z"/></svg>
+      <span>VIVIAN QIAO</span>
+    </a>
+    <div class="stats">
+      <span class="hearts" role="img" aria-label="3 of 3 hearts">♥♥♥</span>
+      <span class="boops">BOOPS <span id="boops">0000</span></span>
+    </div>
+    <nav aria-label="Zones">
+      <a href="#meadow">BOOP</a>
+      <a href="#dreams">ODO</a>
+      <a href="#library">STORIES</a>
+      <a href="#tower">WORK</a>
+      <a href="#mailbox">MAIL</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="zh" lang="zh-Hans" aria-pressed="false">中文</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="scene">
+    <svg class="crisp" viewBox="0 0 320 150" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <rect class="s1" x="0" y="0" width="320" height="32"/>
+      <rect class="s2" x="0" y="32" width="320" height="22"/>
+      <rect class="s3" x="0" y="54" width="320" height="18"/>
+      <rect class="s4" x="0" y="72" width="320" height="16"/>
+      <rect class="s5" x="0" y="88" width="320" height="24"/>
+      <path class="halo" d="M262 12h16v2h-16z M258 14h24v2h-24z M256 16h28v4h-28z M254 20h32v16h-32z M256 36h28v4h-28z M258 40h24v2h-24z M262 42h16v2h-16z"/>
+      <path class="sun" d="M265 17h10v2h-10z M262 19h16v2h-16z M261 21h18v2h-18z M260 23h20v10h-20z M261 33h18v2h-18z M262 35h16v2h-16z M265 37h10v2h-10z"/>
+      <g class="cloud1"><path fill="#FFFFFF" d="M40 20h14v4h-14z M34 24h30v4h-30z M28 28h48v6h-48z M212 14h10v3h-10z M207 17h22v4h-22z"/><path fill="#E3F2FC" d="M28 34h48v2h-48z M207 21h22v2h-22z"/></g>
+      <g class="cloud2"><path fill="#FFFFFF" d="M160 46h12v4h-12z M154 50h26v4h-26z M150 54h36v4h-36z"/><path fill="#E3F2FC" d="M150 58h36v2h-36z"/></g>
+      <path class="city" d="M4 92h10v12h-10z M16 86h7v18h-7z M25 94h8v10h-8z M35 80h6v24h-6z M43 88h10v16h-10z M55 74h8v30h-8z M57 68h4v6h-4z M58 62h2v6h-2z M65 90h9v14h-9z M76 84h6v20h-6z M84 92h12v12h-12z M98 82h7v22h-7z M107 88h9v16h-9z M118 70h9v34h-9z M119 66h7v4h-7z M120 62h5v4h-5z M121 58h3v4h-3z M122 52h1v6h-1z M129 86h10v18h-10z M141 92h8v12h-8z M151 78h7v26h-7z M160 88h11v16h-11z M173 82h6v22h-6z M181 94h10v10h-10z M193 76h9v28h-9z M196 70h3v6h-3z M204 88h8v16h-8z M214 84h7v20h-7z M223 92h12v12h-12z M237 80h7v24h-7z M246 90h9v14h-9z M257 86h8v18h-8z M267 94h10v10h-10z M279 82h6v22h-6z M287 88h11v16h-11z M300 78h8v26h-8z M310 90h10v14h-10z"/>
+      <path class="far" d="M20 104h80v8h-80z M30 100h60v4h-60z M40 97h40v3h-40z M50 95h20v2h-20z M150 104h120v8h-120z M162 99h96v5h-96z M176 95h68v4h-68z M190 92h40v3h-40z M200 90h20v2h-20z M270 102h50v10h-50z M280 98h40v4h-40z M292 95h28v3h-28z"/>
+      <path class="near" d="M0 108h320v12h-320z M0 104h44v4h-44z M8 101h28v3h-28z M96 105h60v3h-60z M106 102h36v3h-36z M228 104h70v4h-70z M240 100h44v4h-44z M252 98h20v2h-20z"/>
+      <path fill="#8A5A3A" d="M236 100h4v20h-4z"/>
+      <path class="treeD" d="M230 80h16v4h-16z M228 84h20v4h-20z M226 88h24v8h-24z M228 96h20v2h-20z M231 98h14v2h-14z"/>
+      <path class="treeL" d="M231 82h8v2h-8z M229 86h6v4h-6z"/>
+      <path fill="#FF8FB8" d="M20 114h1v1h-1z M58 112h1v1h-1z M101 115h1v1h-1z M150 113h1v1h-1z M201 115h1v1h-1z M262 112h1v1h-1z M305 114h1v1h-1z"/>
+      <path fill="#FFD54A" d="M38 116h1v1h-1z M83 113h1v1h-1z M127 116h1v1h-1z M176 112h1v1h-1z M223 116h1v1h-1z M284 115h1v1h-1z"/>
+      <path fill="#FFFFFF" d="M12 112h1v1h-1z M110 111h1v1h-1z M188 116h1v1h-1z M253 116h1v1h-1z"/>
+      <path class="grass" d="M0 120h320v4h-320z M6 118h1v2h-1z M8 117h1v3h-1z M30 118h1v2h-1z M47 117h1v3h-1z M49 118h1v2h-1z M70 118h1v2h-1z M92 117h1v3h-1z M94 118h1v2h-1z M118 118h1v2h-1z M140 117h1v3h-1z M163 118h1v2h-1z M165 117h1v3h-1z M190 118h1v2h-1z M212 117h1v3h-1z M244 118h1v2h-1z M246 117h1v3h-1z M270 118h1v2h-1z M296 117h1v3h-1z M298 118h1v2h-1z M314 118h1v2h-1z"/>
+      <rect fill="#C98B5A" x="0" y="124" width="320" height="26"/>
+      <path fill="#B27447" d="M14 130h3v1h-3z M40 138h2v1h-2z M66 128h3v1h-3z M92 144h2v1h-2z M120 133h3v1h-3z M150 140h2v1h-2z M178 129h3v1h-3z M205 146h2v1h-2z M232 136h3v1h-3z M260 128h2v1h-2z M288 141h3v1h-3z M310 132h2v1h-2z"/>
+      <path fill="#E0C7A6" d="M28 142h3v2h-3z M84 132h2v2h-2z M196 136h3v2h-3z M276 146h2v2h-2z"/>
+    </svg>
+
+    <div class="headline">
+      <div class="wrap">
+        <span class="aha en">AHA!</span>
+        <span class="aha zh" lang="zh-Hans">啊哈！</span>
+        <p class="kicker en">you've entered the secret land of</p>
+        <p class="kicker zh" lang="zh-Hans">你误入了</p>
+        <h1>Vivian Qiao</h1>
+        <p class="kicker after zh" lang="zh-Hans">的秘密领地</p>
+      </div>
+    </div>
+
+    <div class="pet-walk">
+      <div>
+        <span class="bubble" id="bubble" hidden>boop!</span>
+        <button type="button" class="pet-btn bob" id="petBtn" aria-label="Boop the pet">
+          <svg class="pet crisp" viewBox="0 0 16 11" aria-hidden="true"><use href="#pet"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap dialog-wrap">
+    <div class="dialog">
+      <span class="speaker" id="speaker">???</span>
+      <p id="line" aria-live="polite">Aha! You've entered the secret land of Vivian Qiao.</p>
+      <div class="row">
+        <span class="count"><span id="step" style="margin:0;color:inherit">1 / 3</span><span class="blink" aria-hidden="true">▼</span></span>
+        <button type="button" class="btn dark" id="next"><span id="nextLabel">NEXT</span> ▶</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="zone" id="meadow" style="background:var(--meadow)">
+  <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--dirt) 0 24px,var(--meadow) 24px 48px)"></div>
+  <div class="wrap">
+    <span class="sign">ZONE 1</span>
+    <div class="zone-head">
+      <h2>Boop Meadow</h2>
+      <p>Where the pets live. Boop is the desktop pet app I make after hours, at <a href="https://getbooped.com" style="font-weight:700;text-decoration-thickness:2px;text-underline-offset:4px">getbooped.com</a>.</p>
+    </div>
+    <div class="panel project">
+      <a class="window" href="https://getbooped.com" aria-label="Visit getbooped.com" style="text-decoration:none;color:inherit">
+        <div class="bar"><span>BOOP</span><span>A FRIEND'S PET IS VISITING</span></div>
+        <div class="desk">
+          <div class="table"></div>
+          <div class="pa bob"><svg class="pet crisp" aria-hidden="true" viewBox="0 0 16 11"><use href="#pet"/></svg></div>
+          <div class="pb bob"><svg class="pet crisp" aria-hidden="true" viewBox="0 0 16 11"><use href="#pet"/></svg></div>
+          <span class="say">boop!</span>
+          <svg class="heart crisp twinkle" viewBox="0 0 7 6" aria-hidden="true"><path fill="#FF5A8A" d="M1 0h2v1h-2z M4 0h2v1h-2z M0 1h7v2h-7z M1 3h5v1h-5z M2 4h3v1h-3z M3 5h1v1h-1z"/></svg>
+        </div>
+      </a>
+      <div class="text">
+        <div class="chips">
+          <span class="chip" style="background:var(--yellow)">▲ LIVE</span>
+          <span class="chip">MAC</span>
+          <span class="chip">WINDOWS</span>
+        </div>
+        <h3>Boop</h3>
+        <p class="tag">Get a pet, boop your friends.</p>
+        <p class="desc">Pixel pets that live on your desktop and drop by your friends' screens. Poke them, play with them, tuck them in at night.</p>
+        <div class="links">
+          <a class="btn" href="https://getbooped.com">GETBOOPED.COM ▶</a>
+          <a class="textlink" href="https://x.com/getboopedhq">@GETBOOPEDHQ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="zone dreams" id="dreams">
+  <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--meadow) 0 24px,var(--night) 24px 48px)"></div>
+  <svg class="star crisp twinkle" style="left:6%;top:12%;width:15px;fill:#FFE27A" aria-hidden="true"><use href="#star"/></svg>
+  <svg class="star crisp" style="left:30%;top:9%;width:10px;fill:#FFFFFF" aria-hidden="true"><use href="#star"/></svg>
+  <svg class="star crisp" style="left:52%;top:15%;width:15px;fill:#FFE27A" aria-hidden="true"><use href="#star"/></svg>
+  <svg class="star crisp twinkle" style="left:3%;top:62%;width:10px;fill:#FFFFFF;animation-delay:-.9s" aria-hidden="true"><use href="#star"/></svg>
+  <svg class="star crisp" style="left:95%;top:55%;width:15px;fill:#FFE27A" aria-hidden="true"><use href="#star"/></svg>
+  <svg class="star crisp twinkle" style="left:70%;top:7%;width:10px;fill:#FFFFFF;animation-delay:-.4s" aria-hidden="true"><use href="#star"/></svg>
+  <svg class="moon crisp" viewBox="0 0 16 16" aria-hidden="true"><path fill="#F4EBC9" d="M5 1h6v1h-6z M3 2h10v2h-10z M2 4h12v2h-12z M1 6h14v4h-14z M2 10h12v2h-12z M3 12h10v2h-10z M5 14h6v1h-6z"/><path fill="#2B2554" d="M8 2h5v2h-5z M9 4h5v2h-5z M10 6h5v4h-5z M9 10h5v2h-5z M8 12h5v2h-5z"/></svg>
+  <div class="wrap">
+    <span class="sign">ZONE 2</span>
+    <div class="zone-head">
+      <h2>Dream Clouds</h2>
+      <p>Where Odo is being built. Quiet, please.</p>
+    </div>
+    <div class="panel project">
+      <div class="text">
+        <div class="chips">
+          <span class="chip" style="background:#C9BFFF">● IN DEVELOPMENT</span>
+          <span class="chip">IPHONE</span>
+        </div>
+        <h3>Odo</h3>
+        <p class="tag">Step inside your dream.</p>
+        <p class="desc">A dream journal you talk to. Say your dream out loud when you wake up, and Odo turns it into a scene you can step back into. Every night lands on one timeline.</p>
+        <p class="label" style="margin:0;padding-top:6px;font-size:13px">COMING TO THE APP STORE</p>
+      </div>
+      <div class="dreamlog">
+        <div class="top"><span style="color:#FFE27A">DREAM LOG</span><span style="color:#C9CCEA">EXAMPLE WEEK</span></div>
+        <div class="week" aria-hidden="true">
+          <div><span>M</span><i class="on"></i></div>
+          <div><span>T</span><i class="best"></i></div>
+          <div><span>W</span><i></i></div>
+          <div><span>T</span><i class="on"></i></div>
+          <div><span>F</span><i></i></div>
+          <div><span>S</span><i class="on"></i></div>
+          <div><span>S</span><i class="on"></i></div>
+        </div>
+        <div class="entry">
+          <span>TUESDAY</span>
+          <p>Ice skating down the Hudson with a frog who kept asking for directions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="zone library" id="library">
+  <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--night) 0 24px,var(--library) 24px 48px)"></div>
+  <div class="wrap">
+    <div class="col">
+      <span class="sign">ZONE 3</span>
+      <h2>Story Library</h2>
+      <p>I write fiction under a pen name, SaltyMalty. The book on the desk right now is Shadows of Upper East, a novel told through several characters living in New York.</p>
+      <p class="label" style="font-size:13px">EXCERPTS COMING SOON</p>
+      <svg class="shelf crisp" viewBox="0 0 72 44" aria-hidden="true">
+        <path fill="#B9814F" d="M2 2h68v18h-68z M2 22h68v20h-68z"/>
+        <path fill="#8A5A3A" d="M0 0h72v2h-72z M0 0h2v44h-2z M70 0h2v44h-2z M0 20h72v2h-72z M0 42h72v2h-72z"/>
+        <path fill="#FF8FB8" d="M4 6h5v14h-5z M50 8h4v12h-4z M16 25h5v17h-5z"/>
+        <path fill="#FFD54A" d="M10 8h4v12h-4z M55 6h5v14h-5z M34 26h4v16h-4z"/>
+        <path fill="#6FA8FF" d="M15 5h6v15h-6z M61 9h4v11h-4z M26 28h6v14h-6z"/>
+        <path fill="#2A1E3A" d="M22 9h3v11h-3z M11 29h4v13h-4z"/>
+        <path fill="#7CCB6E" d="M26 7h5v13h-5z M4 27h6v15h-6z"/>
+        <path fill="#8E7CF0" d="M32 4h4v16h-4z"/>
+        <path fill="#FFFFFF" d="M38 10h5v10h-5z M22 30h3v12h-3z M44 36h16v2h-16z M45 38h15v2h-15z M44 40h16v2h-16z"/>
+        <path fill="#3E9A4F" d="M64 30h2v6h-2z M62 28h2v4h-2z M66 29h2v3h-2z"/>
+        <path fill="#C2410C" d="M62 36h6v6h-6z"/>
+      </svg>
+    </div>
+    <div class="ms-col">
+      <div class="panel manuscript">
+        <span class="stamp">DRAFT</span>
+        <p class="title">SHADOWS OF<br>UPPER EAST</p>
+        <p style="color:var(--muted)">a novel</p>
+        <p>by SaltyMalty</p>
+        <p class="foot">NEW YORK · WORK IN PROGRESS</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="zone tower" id="tower">
+  <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--library) 0 24px,var(--tower) 24px 48px)"></div>
+  <div class="wrap">
+    <span class="sign">ZONE 4</span>
+    <div class="zone-head">
+      <h2>Day Job Tower</h2>
+      <p>Where I go while the pets are napping.</p>
+    </div>
+    <div class="panel quest">
+      <div class="top"><span>QUEST LOG</span><span style="color:var(--muted)">4 QUESTS</span></div>
+      <ul>
+        <li>
+          <div class="when"><span class="status now">IN PROGRESS</span><span class="years">2025 – NOW</span></div>
+          <div class="who"><h3>A hedge fund</h3><p>Risk helper, professional vibe coder</p></div>
+          <p class="what">I help them manage risk better. Mostly I vibe code until the numbers behave.</p>
+        </li>
+        <li>
+          <div class="when"><span class="status">COMPLETE ✓</span><span class="years">2022 – 2025</span></div>
+          <div class="who"><h3>Blackstone</h3><p>Analyst, then Associate</p></div>
+          <p class="what">Where I leveled up.</p>
+        </li>
+        <li>
+          <div class="when"><span class="status">COMPLETE ✓</span><span class="years">2022</span></div>
+          <div class="who"><h3>Duke University</h3><p>Master's</p></div>
+          <p class="what">Durham, North Carolina. The year before New York.</p>
+        </li>
+        <li>
+          <div class="when"><span class="status">COMPLETE ✓</span><span class="years">2021</span></div>
+          <div class="who"><h3>UIBE, Beijing</h3><p>Bachelor's</p></div>
+          <p class="what">University of International Business and Economics. Before that, growing up by the sea in Weihai.</p>
+        </li>
+      </ul>
+    </div>
+    <div class="panel inventory">
+      <div class="top"><span>VIBE CODING INVENTORY</span><span style="color:var(--muted)">6 / 6 EQUIPPED</span></div>
+      <div class="slots">
+        <span>CLAUDE</span><span>CODEX</span><span>CURSOR</span><span>PYTHON</span><span>SQL</span><span class="gold">BOOP PET</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="zone mail" id="mailbox">
+  <div class="edge" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--tower) 0 24px,var(--mail) 24px 48px)"></div>
+  <div class="wrap">
+    <div class="col">
+      <span class="sign">ZONE 5</span>
+      <h2>Say hi!</h2>
+      <p>Letters welcome, pixel or otherwise.</p>
+      <div class="panel letter">
+        <a class="email" href="mailto:hello@vivianqiao.com">hello@vivianqiao.com</a>
+        <div class="links" style="padding-top:0">
+          <a class="btn plain" href="https://github.com/realvivianqiao">GITHUB ▶</a>
+          <a class="btn plain" href="https://getbooped.com">BOOP ▶</a>
+        </div>
+      </div>
+    </div>
+    <div class="mailbox">
+      <svg class="crisp" viewBox="0 0 26 32" aria-hidden="true">
+        <path fill="#8A5A3A" d="M10 15h4v17h-4z"/>
+        <path fill="#3B6FD8" d="M6 2h12v2h-12z M4 4h16v10h-16z"/>
+        <path fill="#6FA8FF" d="M6 3h4v1h-4z M5 4h3v3h-3z"/>
+        <path fill="#2A1E3A" d="M6 1h12v1h-12z M4 2h2v2h-2z M18 2h2v2h-2z M3 4h1v10h-1z M20 4h1v10h-1z M3 14h18v1h-18z M7 8h10v1h-10z M21 4h1v9h-1z"/>
+        <path fill="#FF5A8A" d="M22 4h3v3h-3z"/>
+        <path fill="#FFFFFF" d="M9 6h6v2h-6z"/>
+      </svg>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="nap">
+      <svg class="crisp" viewBox="0 0 16 11" width="32" aria-hidden="true"><path fill="#FFFFFF" d="M2 1h2v1h-2z M12 1h2v1h-2z M2 2h12v1h-12z M1 3h14v5h-14z M2 8h12v1h-12z M3 9h10v1h-10z"/><path fill="#FF8FB8" d="M2 6h2v1h-2z M12 6h2v1h-2z"/><path fill="#2A1E3A" d="M2 0h2v1h-2z M12 0h2v1h-2z M1 1h1v2h-1z M4 1h1v1h-1z M11 1h1v1h-1z M14 1h1v2h-1z M5 2h6v1h-6z M0 3h1v5h-1z M15 3h1v5h-1z M3 5h3v1h-3z M10 5h3v1h-3z M7 6h2v1h-2z M1 8h1v1h-1z M14 8h1v1h-1z M2 9h1v1h-1z M5 9h6v1h-6z M13 9h1v1h-1z M3 10h2v1h-2z M11 10h2v1h-2z"/></svg>
+      <span class="zzz twinkle">z z z</span>
+    </span>
+    <span>SAVE POINT ✦ © 2026 VIVIAN QIAO</span>
+    <span class="city">NEW YORK</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  // Sky follows the visitor's local time.
+  var h = new Date().getHours();
+  root.dataset.time = (h >= 7 && h < 17) ? "day" : (h >= 17 && h < 20) ? "sunset" : "night";
+
+  // Language
+  var lang = "en";
+  try { lang = localStorage.getItem("vq-lang") || (navigator.language || "").toLowerCase().indexOf("zh") === 0 && "zh" || "en"; } catch (e) {}
+  var buttons = document.querySelectorAll("[data-set-lang]");
+
+  // Dialogue
+  var LINES = {
+    en: [
+      "Aha! You've entered the secret land of Vivian Qiao.",
+      "By day she helps a hedge fund in New York manage risk better. By night she vibe codes tiny software. Like me!",
+      "She also writes stories. Wander around, nothing here breaks. And boop me anytime."
+    ],
+    zh: [
+      "啊哈！你误入了 Vivian Qiao 的秘密领地。",
+      "她白天帮纽约一家对冲基金把风险管得更好，晚上 vibe code 一些小软件，比如我。",
+      "她还写小说。随便逛逛吧，这里什么都不会坏。想 boop 我就 boop！"
+    ]
+  };
+  var SPEAKERS = { en: ["???", "BOOP PET", "BOOP PET"], zh: ["???", "BOOP 小宠物", "BOOP 小宠物"] };
+  var NEXT = { en: ["NEXT", "AGAIN"], zh: ["继续", "再听一遍"] };
+  var step = 0;
+  var lineEl = document.getElementById("line");
+  var speakerEl = document.getElementById("speaker");
+  var stepEl = document.getElementById("step");
+  var nextLabel = document.getElementById("nextLabel");
+
+  function renderDialog() {
+    lineEl.textContent = LINES[lang][step];
+    lineEl.lang = lang === "zh" ? "zh-Hans" : "en";
+    speakerEl.textContent = SPEAKERS[lang][step];
+    stepEl.textContent = (step + 1) + " / 3";
+    nextLabel.textContent = NEXT[lang][step < 2 ? 0 : 1];
+  }
+  function setLang(next) {
+    lang = next;
+    root.dataset.lang = lang;
+    root.lang = lang === "zh" ? "zh-Hans" : "en";
+    buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.setLang === lang)); });
+    try { localStorage.setItem("vq-lang", lang); } catch (e) {}
+    renderDialog();
+  }
+  buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.setLang); }); });
+  document.getElementById("next").addEventListener("click", function () { step = (step + 1) % 3; renderDialog(); });
+  setLang(lang === "zh" ? "zh" : "en");
+
+  // Boop
+  var boops = 0;
+  try { boops = parseInt(localStorage.getItem("vq-boops") || "0", 10) || 0; } catch (e) {}
+  var boopsEl = document.getElementById("boops");
+  var pet = document.getElementById("petBtn");
+  var bubble = document.getElementById("bubble");
+  var t;
+  function showBoops() { boopsEl.textContent = String(boops).padStart(4, "0"); }
+  showBoops();
+  pet.addEventListener("click", function () {
+    boops += 1;
+    showBoops();
+    try { localStorage.setItem("vq-boops", String(boops)); } catch (e) {}
+    pet.classList.remove("hop", "bob");
+    void pet.offsetWidth;
+    pet.classList.add("hop");
+    bubble.hidden = false;
+    clearTimeout(t);
+    t = setTimeout(function () { bubble.hidden = true; }, 900);
+  });
+})();
+</script>
+</body>
+</html>
