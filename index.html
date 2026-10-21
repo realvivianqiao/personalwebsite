@@ -88,7 +88,6 @@ html[data-mode="train"] #train{display:block;animation:modeIn .4s ease-out}
 /* ---------- night: the back bar ---------- */
 #night{font-family:'Lato',system-ui,sans-serif}
 #night a{color:#E7B566}#night a:hover{color:#EADBC0}
-#night .menu a{color:#7A2433}#night .menu a:hover{color:#2A1712}
 #night .smoke{animation:smoke 7s ease-in-out infinite}
 @keyframes smoke{0%,100%{opacity:.32;transform:translateX(0)}50%{opacity:.16;transform:translateX(12px)}}
 #night .lampglow{animation:lamp 5s ease-in-out infinite}
@@ -187,7 +186,7 @@ html:not([data-mode]) .mv.n,html[data-mode="night"] .mv.n,html[data-mode="light"
 .work-text{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 .work-pv{flex:1 1 420px;min-width:0;display:flex;justify-content:center}
 .label{margin:0;font-family:var(--b-font);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--label)}
-html[data-mode="train"] .work .label::before{content:"";display:inline-block;width:8px;height:8px;margin-right:12px;border:2px solid #E8913A;animation:vqBeat .94s steps(1) infinite}
+html[data-mode="train"] .top-row .label::before,html[data-mode="train"] .work .label::before{content:"";display:inline-block;width:8px;height:8px;margin-right:12px;border:2px solid #E8913A;animation:vqBeat .94s steps(1) infinite}
 .work h2{margin:0;font-family:var(--h-font);font-weight:var(--h-weight);text-transform:var(--h-case);letter-spacing:var(--h-track);font-size:clamp(40px,4.6vw,64px);line-height:1.04}
 .tag{margin:0;font-family:var(--h-font);font-weight:var(--h-weight);font-size:clamp(22px,2.1vw,28px);line-height:1.3;color:var(--tag)}
 html[data-mode="train"] .tag{font-weight:400}
@@ -291,13 +290,15 @@ html[data-mode="train"] .btn:hover{background:#E8913A;color:#0A0E0E!important;op
 .uw-top{display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
 .uw-live{color:#FF6A5C;animation:uwBlink 1.6s steps(1) infinite}
 @keyframes uwBlink{50%{opacity:.3}}
-.uw-main{display:flex;align-items:center;gap:16px}
+.uw-main{display:flex;flex-wrap:wrap;align-items:center;gap:14px 16px}
+.uw-title{flex:1 1 160px;min-width:0}
+.uw-title p{margin:0}
 .uw-disc{flex:none;position:relative;width:68px;height:68px;border-radius:50%;background:repeating-radial-gradient(circle,#151515 0 2px,#2A2A2A 2px 4px);animation:uwSpin 2.4s linear infinite}
 .uw-disc::after{content:"";position:absolute;inset:24px;border-radius:50%;background:var(--eq)}
 @keyframes uwSpin{to{transform:rotate(360deg)}}
-.uw-track{margin:0;font-family:var(--h-font);font-weight:var(--h-weight);text-transform:var(--h-case);letter-spacing:var(--h-track);font-size:30px;line-height:1.1}
+.uw-track{margin:0;font-family:var(--h-font);font-weight:var(--h-weight);text-transform:var(--h-case);letter-spacing:var(--h-track);font-size:clamp(20px,2vw,26px);line-height:1.15}
 .uw-sub{margin:2px 0 0;opacity:.75;font-size:15px}
-.uw-eq{display:flex;align-items:flex-end;gap:4px;height:72px}
+.uw-eq{display:flex;align-items:flex-end;gap:4px;height:56px}
 .uw-eq i{flex:1;background:var(--eq);transform-origin:50% 100%;animation:uwEq .9s ease-in-out infinite alternate}
 .uw-eq i:nth-child(3n){animation-duration:.7s}
 .uw-eq i:nth-child(4n+1){animation-duration:1.1s}
@@ -305,17 +306,45 @@ html[data-mode="train"] .btn:hover{background:#E8913A;color:#0A0E0E!important;op
 .uw-eq i:nth-child(2n){animation-delay:-.3s}
 .uw-eq i:nth-child(7n){animation-delay:-.6s}
 @keyframes uwEq{from{transform:scaleY(.2)}to{transform:scaleY(1)}}
-.uw-prog{height:3px;background:rgba(255,255,255,.18)}
-.uw-prog i{display:block;height:100%;width:30%;background:var(--eq);animation:uwProg 40s linear infinite}
-@keyframes uwProg{from{width:0}to{width:100%}}
-.uw-ctrl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
 .uw-play{appearance:none;-webkit-appearance:none;border:1px solid var(--eq);background:transparent;color:var(--uw-ink);font:700 13px/1 var(--b-font);letter-spacing:.14em;text-transform:uppercase;padding:10px 18px;border-radius:999px;cursor:pointer}
 .uw-play:hover{background:var(--eq);color:var(--uw-bg)}
-.uw-ctrl span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
 .pv-uw.paused,.pv-uw.paused *,.pv-uw.paused *::after{animation-play-state:paused!important}
 .uw-embed{display:none;border-radius:12px;overflow:hidden;min-height:152px}
 .uw-embed.on{display:block}
 .uw-embed iframe{display:block;width:100%;border:0}
+
+/* top row: hello + music */
+.mvb{display:none}
+html:not([data-mode]) .mvb.n,html[data-mode="night"] .mvb.n,html[data-mode="light"] .mvb.l,html[data-mode="train"] .mvb.t{display:block}
+.top-row{font-family:var(--b-font)}
+.top-grid{display:flex;flex-wrap:wrap;align-items:center;gap:40px 64px;padding-block:clamp(56px,6vw,88px)}
+.top-text{flex:1 1 400px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.top-player{flex:1 1 440px;min-width:0;display:flex;justify-content:center}
+.intro{margin:0;font-family:var(--h-font);font-weight:var(--h-weight);font-size:clamp(26px,2.6vw,38px);line-height:1.3;color:var(--intro)}
+html[data-mode="train"] .intro{font-weight:300}
+html,html[data-mode="night"]{--intro:#F3E6CC;--tk-bg:#F2D27A;--tk-stub:#E7B94F;--tk-ink:#2A1712;--tk-k:#7A2433}
+html[data-mode="light"]{--intro:#16222B;--tk-bg:#F6D2B0;--tk-stub:#EDBE95;--tk-ink:#1E2A33;--tk-k:#A8432F}
+html[data-mode="train"]{--intro:#F1E8D4;--tk-bg:#E8913A;--tk-stub:#D27C2A;--tk-ink:#0A0E0E;--tk-k:#3B1416}
+.jump{display:flex;flex-wrap:wrap;gap:8px 18px;padding-top:4px}
+.top-row .jump a{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--label);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+.top-row .jump a:hover{border-bottom-color:currentColor}
+.top-row .pv-frame{max-width:540px}
+.uw-play{flex:none}
+button.btn{font-family:inherit;cursor:pointer}
+
+/* underworld ticket */
+.ticket{position:relative;display:flex;width:100%;max-width:500px;background:var(--tk-bg);color:var(--tk-ink);border-radius:10px;transform:rotate(-2deg);box-shadow:0 24px 40px -22px rgba(0,0,0,.7);overflow:hidden;
+  -webkit-mask:radial-gradient(circle at calc(100% - 92px) 0,transparent 11px,#000 11.5px) top/100% 51% no-repeat,radial-gradient(circle at calc(100% - 92px) 100%,transparent 11px,#000 11.5px) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle at calc(100% - 92px) 0,transparent 11px,#000 11.5px) top/100% 51% no-repeat,radial-gradient(circle at calc(100% - 92px) 100%,transparent 11px,#000 11.5px) bottom/100% 51% no-repeat}
+.ticket::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.45) 50%,transparent 60%);transform:translateX(-100%);animation:shine 5s ease-in-out infinite;pointer-events:none}
+@keyframes shine{0%,55%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.tk-main{flex:1;min-width:0;padding:24px 26px;display:flex;flex-direction:column;gap:6px;border-right:2px dashed rgba(0,0,0,.28)}
+.tk-k{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--tk-k)}
+.tk-band{margin:0;font-family:var(--h-font);font-weight:var(--h-weight);text-transform:uppercase;letter-spacing:.08em;font-size:clamp(30px,3.6vw,44px);line-height:1}
+.tk-sub{margin:0;font-size:15px}
+.tk-meta{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.tk-stub{flex:0 0 92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:var(--tk-stub);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.tk-stub b{font-size:20px;letter-spacing:.08em}
 
 /* say hi */
 .work.hello{background:var(--hello-bg);color:var(--hello-ink);text-align:center}
@@ -326,8 +355,6 @@ html[data-mode="train"] .btn:hover{background:#E8913A;color:#0A0E0E!important;op
 html[data-mode="train"] .big-mail{letter-spacing:.04em}
 .site-foot{border-top:1px solid var(--line);font-family:var(--b-font);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .site-foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-block:28px 40px}
-#night .mlink{color:inherit;text-decoration:none}
-#night .mlink:hover{color:#7A2433;text-decoration:underline}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -405,25 +432,6 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 <div class="wrap" style="padding-block: clamp(28px, 3.6vw, 52px) 24px; display: flex; flex-direction: column; gap: 10px">
 <p style="margin: 0; font-weight: 700; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; color: #E7B566">Aha! You've entered</p>
 <h1 style="margin: 0; max-width: 560px; font-family: 'Gilda Display', Georgia, serif; font-weight: 400; font-size: clamp(42px, 5vw, 76px); line-height: 1.02; color: #F3E6CC; text-shadow: 0 2px 20px rgba(26, 15, 12, 0.85)">The secret land of Vivian Qiao</h1>
-</div>
-</div>
-</section>
-
-<section>
-<div class="wrap" style="max-width: 900px; padding-block: 72px 80px">
-<div class="menu" style="background: #EADBC0; color: #2A1712; border: 1px solid #C08A3E; outline: 1px solid #C08A3E; outline-offset: 6px; padding: clamp(28px, 4vw, 52px); display: flex; flex-direction: column; gap: 22px">
-<div style="text-align: center; display: flex; flex-direction: column; gap: 6px">
-<span style="font-weight: 700; font-size: 13px; letter-spacing: 0.26em; text-transform: uppercase; color: #7A2433">The back bar · tonight's list</span>
-<p style="margin: 0; font-family: 'Gilda Display', Georgia, serif; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.35">By day she helps a hedge fund manage risk better. By night she vibe codes tiny software and writes stories.</p>
-</div>
-<div style="display: flex; flex-direction: column; gap: 16px">
-<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; border-top: 1px solid #C9AE80; padding-top: 14px"><h2 style="flex: 0 0 auto; margin: 0; font-family: 'Gilda Display', Georgia, serif; font-weight: 400; font-size: 28px; line-height: 1.1"><a class="mlink" href="#boop">Boop</a></h2><p style="flex: 1 1 260px; min-width: 0; margin: 0; align-self: flex-end">Pink and playful, finishes with a friend's pet. <a href="https://getbooped.com">getbooped.com</a></p></div>
-<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; border-top: 1px solid #C9AE80; padding-top: 14px"><h2 style="flex: 0 0 auto; margin: 0; font-family: 'Gilda Display', Georgia, serif; font-weight: 400; font-size: 28px; line-height: 1.1"><a class="mlink" href="#odo">Odo</a></h2><p style="flex: 1 1 260px; min-width: 0; margin: 0; align-self: flex-end">Dark and dreamy. A dream journal you talk to. Best after midnight.</p></div>
-<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; border-top: 1px solid #C9AE80; padding-top: 14px"><h2 style="flex: 0 0 auto; margin: 0; font-family: 'Gilda Display', Georgia, serif; font-weight: 400; font-size: 28px; line-height: 1.1"><a class="mlink" href="#sprout">Sprout</a></h2><p style="flex: 1 1 260px; min-width: 0; margin: 0; align-self: flex-end">Bright and green, with branching notes. Learn anything by branching off. <a href="https://claude.ai/artifact/6CxyiYwrFtQfvTWgEQFqNS">Open Sprout</a></p></div>
-<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; border-top: 1px solid #C9AE80; padding-top: 14px"><h2 style="flex: 0 0 auto; margin: 0; font-family: 'Gilda Display', Georgia, serif; font-weight: 400; font-size: 28px; line-height: 1.1"><a class="mlink" href="#stories">Shadows of Upper East</a></h2><p style="flex: 1 1 260px; min-width: 0; margin: 0; align-self: flex-end">Full-bodied, very New York, still aging. A novel by SaltyMalty.</p></div>
-<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; border-top: 1px solid #C9AE80; border-bottom: 1px solid #C9AE80; padding-block: 14px"><h2 style="flex: 0 0 auto; margin: 0; font-family: 'Gilda Display', Georgia, serif; font-weight: 400; font-size: 28px; line-height: 1.1"><a class="mlink" href="#underworld">Underworld</a></h2><p style="flex: 1 1 260px; min-width: 0; margin: 0; align-self: flex-end">Smoky and deep. Always on in the back room.</p></div>
-</div>
-<p style="margin: 0; text-align: center; font-size: 16px">Reservations: <a href="mailto:hello@vivianqiao.com" style="font-weight: 700">hello@vivianqiao.com</a></p>
 </div>
 </div>
 </section>
@@ -511,13 +519,6 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 </div>
 </section>
 
-<section>
-<div class="wrap" style="padding-block: 64px 24px; display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: baseline">
-<p style="flex: 0 0 200px; margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6A55">By the sea</p>
-<p style="flex: 1 1 520px; min-width: 0; margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; font-size: clamp(28px, 2.8vw, 40px); line-height: 1.25">I grew up by the sea in Weihai, watching boats leave the harbor. Now I live in New York, where I help a hedge fund manage risk better and vibe code tiny software at night.</p>
-</div>
-</section>
-
 </div>
 
 <!-- ======================= TRAIN · DARK AND LONG ======================= -->
@@ -602,14 +603,28 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 </svg>
 </section>
 
-<section>
-<div class="wrap" style="padding-block: 64px 24px; display: flex; flex-wrap: wrap; gap: 20px 64px; align-items: baseline">
-<p style="flex: 0 0 200px; margin: 0; font-size: 14px; letter-spacing: 0.28em; text-transform: uppercase; color: #E8913A">Night service</p>
-<p style="flex: 1 1 520px; min-width: 0; margin: 0; font-weight: 300; font-size: clamp(24px, 2.4vw, 32px); line-height: 1.45; color: #F1E8D4">By day I help a hedge fund manage risk better. By night I vibe code tiny software and write stories. Sit anywhere. Nobody else is on this train.</p>
+</div>
+
+<!-- ======================= TOP ROW: hello + music (shared) ======================= -->
+<section class="top-row">
+<div class="wrap top-grid">
+<div class="top-text">
+<p class="label"><span class="mv n">The back bar · tonight</span><span class="mv l">By the sea</span><span class="mv t">Night service</span></p>
+<p class="intro mvb n">By day she helps a hedge fund manage risk better. By night she vibe codes tiny software and writes stories. Pull up a stool, the record's on.</p>
+<p class="intro mvb l">I grew up by the sea in Weihai, watching boats leave the harbor. Now I live in New York, where I help a hedge fund manage risk better and vibe code tiny software at night.</p>
+<p class="intro mvb t">By day I help a hedge fund manage risk better. By night I vibe code tiny software and write stories. Sit anywhere. Nobody else is on this train.</p>
+<nav class="jump" aria-label="On this page"><a href="#boop">Boop</a><a href="#odo">Odo</a><a href="#sprout">Sprout</a><a href="#stories">Stories</a><a href="#dayjob">Day job</a><a href="#underworld">Underworld</a><a href="#hello">Say hi</a></nav>
+</div>
+<div class="top-player">
+<div class="pv-frame pv-uw">
+<div class="uw-top"><span><span class="mv n">On the jukebox</span><span class="mv l">On the radio</span><span class="mv t">Now playing</span></span><span class="uw-live">● Live</span></div>
+<div class="uw-main"><div class="uw-disc" aria-hidden="true"></div><div class="uw-title"><p class="uw-track">Another place, another time</p><p class="uw-sub">A playlist by Vivian</p></div><button type="button" class="uw-play js-play" data-play="▶ Play" data-pause="❚❚ Pause">▶ Play</button></div>
+<div class="uw-eq" aria-hidden="true"><i style="height: 40%"></i><i style="height: 70%"></i><i style="height: 55%"></i><i style="height: 90%"></i><i style="height: 35%"></i><i style="height: 65%"></i><i style="height: 80%"></i><i style="height: 45%"></i><i style="height: 60%"></i><i style="height: 30%"></i><i style="height: 75%"></i><i style="height: 50%"></i><i style="height: 85%"></i><i style="height: 40%"></i><i style="height: 68%"></i><i style="height: 52%"></i><i style="height: 88%"></i><i style="height: 36%"></i></div>
+<div class="uw-embed"><div id="spotify-embed"></div></div>
+</div>
+</div>
 </div>
 </section>
-
-</div>
 
 <!-- ======================= THE WORK (shared, dressed by each mode) ======================= -->
 <div class="works">
@@ -745,17 +760,18 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 <p class="label"><span class="mv n">Last call · Smoky and deep</span><span class="mv l">Log 06 · On the radio</span><span class="mv t">Last stop · Dark and long</span></p>
 <h2>Underworld</h2>
 <p class="tag">Always playing.</p>
-<p class="desc">The band I love. Down here it's electronic music, and mostly it's Underworld, on repeat.</p>
-<div class="links"><a class="btn" href="https://underworldlive.com">underworldlive.com ↗</a></div>
+<p class="desc">The band I love. Down here it's electronic music, and mostly it's Underworld. My playlist is up top, or press play right here.</p>
+<div class="links"><button type="button" class="btn js-play" data-play="▶ Play my playlist" data-pause="❚❚ Pause the playlist">▶ Play my playlist</button><a href="https://underworldlive.com">underworldlive.com ↗</a></div>
 </div>
 <div class="work-pv">
-<div class="pv-frame pv-uw">
-<div class="uw-top"><span>Now playing</span><span class="uw-live">● Live</span></div>
-<div class="uw-main"><div class="uw-disc" aria-hidden="true"></div><div><p class="uw-track">Underworld</p><p class="uw-sub">On repeat, all the way down.</p></div></div>
-<div class="uw-eq" aria-hidden="true"><i style="height: 40%"></i><i style="height: 70%"></i><i style="height: 55%"></i><i style="height: 90%"></i><i style="height: 35%"></i><i style="height: 65%"></i><i style="height: 80%"></i><i style="height: 45%"></i><i style="height: 60%"></i><i style="height: 30%"></i><i style="height: 75%"></i><i style="height: 50%"></i><i style="height: 85%"></i><i style="height: 40%"></i><i style="height: 68%"></i><i style="height: 52%"></i><i style="height: 88%"></i><i style="height: 36%"></i></div>
-<div class="uw-prog" aria-hidden="true"><i></i></div>
-<div class="uw-ctrl"><button type="button" class="uw-play">▶ Play music</button><span>via Spotify</span></div>
-<div class="uw-embed"><div id="spotify-embed"></div></div>
+<div class="ticket">
+<div class="tk-main">
+<span class="tk-k">Admit one · <span class="mv n">The back room</span><span class="mv l">The keeper's house</span><span class="mv t">Last carriage</span></span>
+<p class="tk-band">Underworld</p>
+<p class="tk-sub">Dark &amp; Long, all night long.</p>
+<div class="tk-meta"><span>Doors: whenever</span><span>Ends: never</span></div>
+</div>
+<div class="tk-stub" aria-hidden="true"><span>No.</span><b>0001</b></div>
 </div>
 </div>
 </div>
@@ -826,7 +842,7 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
   var MUSIC = 'https://open.spotify.com/playlist/0MshIG4kTAKVFDhHv0mtGg';
 
   var player = document.querySelector('.pv-uw');
-  var playBtn = document.querySelector('.uw-play');
+  var playBtns = Array.prototype.slice.call(document.querySelectorAll('.js-play'));
   var embedBox = document.querySelector('.uw-embed');
   var controller = null, loading = false, failed = false, wantPlay = false;
 
@@ -834,9 +850,10 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
     var m = /open\.spotify\.com\/(?:intl-[a-z-]+\/)?(playlist|album|artist|track)\/([A-Za-z0-9]+)/.exec(link);
     return m ? 'spotify:' + m[1] + ':' + m[2] : link;
   }
+  function setLabels(text) { playBtns.forEach(function (b) { b.textContent = text || b.getAttribute('data-play'); }); }
   function showPlaying(on) {
     player.classList.toggle('paused', !on);
-    playBtn.textContent = on ? '❚❚ Pause' : '▶ Play music';
+    playBtns.forEach(function (b) { b.textContent = b.getAttribute(on ? 'data-pause' : 'data-play'); });
   }
   function loadSpotify() {
     if (loading || controller) return;
@@ -848,8 +865,7 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
           controller = c;
           c.addListener('ready', function () {
             embedBox.classList.add('on');
-            if (wantPlay) { c.play(); }
-            else if (playBtn.textContent.indexOf('Loading') === 0) { playBtn.textContent = '▶ Play music'; }
+            if (wantPlay) { c.play(); } else { setLabels(); }
           });
           c.addListener('playback_update', function (e) { showPlaying(!e.data.isPaused); });
         });
@@ -857,23 +873,27 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
     var s = document.createElement('script');
     s.src = 'https://open.spotify.com/embed/iframe-api/v1';
     s.async = true;
-    s.onerror = function () { loading = false; failed = true; playBtn.textContent = '▶ Open in Spotify'; };
+    s.onerror = function () { loading = false; failed = true; setLabels('▶ Open in Spotify'); };
     document.head.appendChild(s);
   }
-  if (player && playBtn && embedBox) {
-    playBtn.addEventListener('click', function () {
-      if (failed) { window.open(MUSIC, '_blank', 'noopener'); return; }
-      if (controller) { embedBox.classList.add('on'); controller.togglePlay(); return; }
-      wantPlay = true;
-      playBtn.textContent = 'Loading…';
-      loadSpotify();
+  if (player && embedBox && playBtns.length) {
+    playBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (failed) { window.open(MUSIC, '_blank', 'noopener'); return; }
+        if (controller) { embedBox.classList.add('on'); controller.togglePlay(); return; }
+        wantPlay = true;
+        setLabels('Loading…');
+        loadSpotify();
+      });
     });
-    // Get the player ready as the visitor scrolls near it, so a click plays right away.
+    // Get the player ready as soon as it is near the screen, so a click plays right away.
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
         if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); loadSpotify(); }
       }, { rootMargin: '400px' });
       io.observe(player);
+    } else {
+      loadSpotify();
     }
   }
 })();
