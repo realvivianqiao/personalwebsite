@@ -257,20 +257,12 @@ html[data-mode="train"] .btn:hover{background:#E8913A;color:#0A0E0E!important;op
 .sp-garden svg.new{animation:spLeaf 7s ease-out infinite}
 .sp-garden span{margin-left:6px}
 
-/* stories preview */
-.pv-story{background:#B88A5E repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 38px);padding:30px 24px;display:flex;justify-content:center}
-.paper{position:relative;width:min(100%,330px);background:#FBF6EA;color:#2B2420;padding:36px 28px 24px;box-shadow:0 16px 30px -14px rgba(0,0,0,.55);font-family:'Courier New',ui-monospace,monospace;font-size:14px;line-height:1.5;transform:rotate(1.5deg);text-transform:none;letter-spacing:0}
-.ms-title{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:28px;line-height:1.1;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
-.ms-sub{margin:10px 0 0;font-style:italic;color:#6A5E52}
-.ms-by{margin:2px 0 0}
-.ms-lines{margin-top:20px;display:flex;flex-direction:column;gap:9px}
-.ms-lines i{display:block;height:6px;background:#D8CDB8;border-radius:2px}
-.ms-lines i.typing{position:relative;width:62%;animation:msType 5s steps(16) infinite}
-.ms-lines i.typing::after{content:"";position:absolute;right:-6px;top:-5px;width:2px;height:16px;background:#2B2420;animation:msCaret 1s steps(1) infinite}
-@keyframes msType{0%{width:0}70%,100%{width:62%}}
-@keyframes msCaret{50%{opacity:0}}
-.ms-foot{margin:22px 0 0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6A5E52}
-.stamp{position:absolute;top:18px;right:16px;border:3px solid #B23A2E;color:#B23A2E;font:700 14px/1 'Courier New',monospace;letter-spacing:.2em;text-transform:uppercase;padding:6px 8px;transform:rotate(-12deg);opacity:.85}
+/* stories preview: chapter 1 as a short film */
+.pv-film{--pv-rot:0deg;background:#0E1024}
+.pv-film video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#0E1024}
+.film-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:#14172E;color:#E7E2F5;font:600 11px/1.2 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
+.film-bar span:first-child{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.film-draft{flex:none;border:1.5px solid #F07A6A;color:#F07A6A;padding:3px 7px;letter-spacing:.2em}
 
 /* day job timeline */
 .timeline{list-style:none;margin:0;padding:0 0 0 8px;width:100%;max-width:520px}
@@ -714,20 +706,16 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 <p class="label"><span class="mv n">No. 4 · Full-bodied, still aging</span><span class="mv l">Log 04 · The keeper's desk</span><span class="mv t">Stop 4 · Stories</span></p>
 <h2>Stories</h2>
 <p class="tag">Shadows of Upper East, by SaltyMalty.</p>
-<p class="desc">I write fiction under a pen name, SaltyMalty. The book on the desk right now is Shadows of Upper East, a novel told through several characters living in New York.</p>
-<div class="chips"><span class="chip">Work in progress</span><span class="chip">Fiction</span></div>
-<p class="note">Excerpts coming soon</p>
+<p class="desc">I write fiction under a pen name, SaltyMalty. The book on the desk right now is Shadows of Upper East, a novel told through several characters living in New York. Chapter 1 is up as a little film. Press play.</p>
+<div class="chips"><span class="chip">Work in progress</span><span class="chip">Fiction</span><span class="chip">Chapter 1</span></div>
+<p class="note">Now showing · The Uninvited Guest</p>
 </div>
 <div class="work-pv">
-<div class="pv-frame pv-story">
-<div class="paper">
-<span class="stamp">Draft</span>
-<p class="ms-title">Shadows of<br>Upper East</p>
-<p class="ms-sub">a novel</p>
-<p class="ms-by">by SaltyMalty</p>
-<div class="ms-lines" aria-hidden="true"><i style="width: 94%"></i><i style="width: 86%"></i><i style="width: 90%"></i><i class="typing"></i></div>
-<p class="ms-foot">New York · work in progress</p>
-</div>
+<div class="pv-frame pv-film">
+<video class="js-film" controls playsinline preload="metadata" poster="media/shadows-ch01-poster.jpg" aria-label="Shadows of Upper East, Chapter 1: The Uninvited Guest">
+<source src="media/shadows-ch01-the-uninvited-guest.mp4" type="video/mp4">
+</video>
+<div class="film-bar"><span>Ch. 1 · The Uninvited Guest</span><span class="film-draft">Draft</span></div>
 </div>
 </div>
 </div>
@@ -844,7 +832,15 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
   var player = document.querySelector('.pv-uw');
   var playBtns = Array.prototype.slice.call(document.querySelectorAll('.js-play'));
   var embedBox = document.querySelector('.uw-embed');
-  var controller = null, loading = false, failed = false, wantPlay = false;
+  var controller = null, loading = false, failed = false, wantPlay = false, musicOn = false;
+
+  // The chapter film and the playlist take turns: starting one pauses the other.
+  var films = Array.prototype.slice.call(document.querySelectorAll('.js-film'));
+  films.forEach(function (v) {
+    v.addEventListener('play', function () {
+      if (controller && musicOn) controller.pause();
+    });
+  });
 
   function toUri(link) {
     var m = /open\.spotify\.com\/(?:intl-[a-z-]+\/)?(playlist|album|artist|track)\/([A-Za-z0-9]+)/.exec(link);
@@ -867,7 +863,11 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
             embedBox.classList.add('on');
             if (wantPlay) { c.play(); } else { setLabels(); }
           });
-          c.addListener('playback_update', function (e) { showPlaying(!e.data.isPaused); });
+          c.addListener('playback_update', function (e) {
+            musicOn = !e.data.isPaused;
+            showPlaying(musicOn);
+            if (musicOn) films.forEach(function (v) { if (!v.paused) v.pause(); });
+          });
         });
     };
     var s = document.createElement('script');
