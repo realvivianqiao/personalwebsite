@@ -22,6 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Lato:wght@400;700&family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Nunito+Sans:opsz,wght@6..12,400..700&family=Jost:wght@300;400;500&display=swap">
+<!-- zhfont:start --><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500&amp;text=%E4%B8%80%E4%B8%8E%E4%B8%AA%E4%BD%A0%E5%86%99%E5%86%AC%E5%86%B2%E5%88%BB%E5%8F%88%E5%8F%AA%E5%9C%A8%E5%A4%8F%E5%A4%A9%E5%AD%98%E6%97%85%E6%97%A5%E6%9C%89%E6%B5%AA%E6%B5%B7%E7%94%9F%E7%97%92%E7%9A%84%E9%A6%86&amp;display=swap"><!-- zhfont:end -->
 <style>
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -263,6 +264,30 @@ html[data-mode="train"] .btn:hover{background:#E8913A;color:#0A0E0E!important;op
 .film-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:#14172E;color:#E7E2F5;font:600 11px/1.2 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
 .film-bar span:first-child{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .film-draft{flex:none;border:1.5px solid #F07A6A;color:#F07A6A;padding:3px 7px;letter-spacing:.2em}
+
+/* writing preview: a reading list, dressed by each mode */
+html,html[data-mode="night"]{--ix-bg:#F3E6CC;--ix-ink:#2A1712;--ix-muted:#7A5A44;--ix-accent:#7A2433;--ix-rule:rgba(42,23,18,.16);--ix-top-bg:#2A1712;--ix-top-ink:#E7B566}
+html[data-mode="light"]{--ix-bg:#FBF7EE;--ix-ink:#1E2A33;--ix-muted:#5A6A55;--ix-accent:#A8432F;--ix-rule:#D9DFE4;--ix-top-bg:#2F5E7A;--ix-top-ink:#F4EDE0}
+html[data-mode="train"]{--ix-bg:#060909;--ix-ink:#F1E8D4;--ix-muted:#8E897C;--ix-accent:#E8913A;--ix-rule:#1C2624;--ix-top-bg:#0D1313;--ix-top-ink:#E8913A}
+.pv-index{background:var(--ix-bg);color:var(--ix-ink);font-family:var(--b-font)}
+.ix-top{display:flex;justify-content:space-between;gap:12px;padding:12px 18px;background:var(--ix-top-bg);color:var(--ix-top-ink);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.ix-list{list-style:none;margin:0;padding:4px 18px}
+.works .ix-list a{display:grid;grid-template-columns:70px minmax(0,1fr) auto;align-items:baseline;gap:12px;padding:13px 0;border-bottom:1px solid var(--ix-rule);color:var(--ix-ink);text-decoration:none}
+.works .ix-list a:hover{opacity:1}
+.ix-list li:last-child a{border-bottom:0}
+.ix-d{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ix-muted)}
+.ix-t{display:flex;flex-direction:column;min-width:0}
+.ix-t b{font-family:var(--h-font);font-weight:var(--h-weight);text-transform:var(--h-case);letter-spacing:var(--h-track);font-size:20px;line-height:1.2;transition:color .2s}
+.ix-t i{font-style:normal;font-family:'Noto Serif SC','Songti SC','STSong','SimSun',serif;font-weight:500;font-size:13px;letter-spacing:.1em;color:var(--ix-muted);margin-top:3px}
+.ix-k{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ix-accent)}
+.works .ix-list a:hover b,.works .ix-list a:focus-visible b{color:var(--ix-accent)}
+.works .ix-more{display:block;padding:13px 18px 16px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ix-accent);text-decoration:none;border-top:1px solid var(--ix-rule)}
+.works .ix-more:hover{text-decoration:underline}
+html[data-mode="train"] .ix-t b{font-size:15px;color:#F1E8D4}
+html[data-mode="train"] .ix-d{color:#E8913A}
+html[data-mode="train"] .ix-top span:first-child::before{content:"";display:inline-block;width:7px;height:7px;margin-right:10px;border-radius:50%;background:#E8913A;animation:uwBlink 1.6s steps(1) infinite}
+.chip-zh{font-family:'Noto Serif SC','Songti SC','STSong','SimSun',serif;letter-spacing:.2em}
+@media (max-width:480px){.works .ix-list a{grid-template-columns:minmax(0,1fr) auto}.ix-d{grid-column:1/-1}}
 
 /* day job timeline */
 .timeline{list-style:none;margin:0;padding:0 0 0 8px;width:100%;max-width:520px}
@@ -521,7 +546,7 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 <p style="margin: 0; font-weight: 400; font-size: 14px; letter-spacing: 0.32em; text-transform: uppercase; color: #E8913A">Aha! You've entered</p>
 <h1 style="margin: 0; font-weight: 300; font-size: clamp(38px, 5vw, 74px); line-height: 1.08; letter-spacing: 0.16em; text-transform: uppercase; color: #F1E8D4">The secret land of Vivian Qiao</h1>
 <p style="margin: 0; max-width: 620px; color: #A9A493">A long ride through the dark. The lights keep passing. Last stop is the Underworld.</p>
-<div class="board" aria-hidden="true"><div class="board-track"><span>Night service to the Underworld · Next stops: Boop · Odo · Sprout · Stories · Underworld · Stand clear of the closing doors ·&nbsp;</span><span>Night service to the Underworld · Next stops: Boop · Odo · Sprout · Stories · Underworld · Stand clear of the closing doors ·&nbsp;</span></div></div>
+<div class="board" aria-hidden="true"><div class="board-track"><span>Night service to the Underworld · Next stops: Boop · Odo · Sprout · Stories · Writing · Underworld · Stand clear of the closing doors ·&nbsp;</span><span>Night service to the Underworld · Next stops: Boop · Odo · Sprout · Stories · Writing · Underworld · Stand clear of the closing doors ·&nbsp;</span></div></div>
 </div>
 </header>
 
@@ -605,7 +630,7 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 <p class="intro mvb n">By day she helps a hedge fund manage risk better. By night she vibe codes tiny software and writes stories. Pull up a stool, the record's on.</p>
 <p class="intro mvb l">I grew up by the sea in Weihai, watching boats leave the harbor. Now I live in New York, where I help a hedge fund manage risk better and vibe code tiny software at night.</p>
 <p class="intro mvb t">By day I help a hedge fund manage risk better. By night I vibe code tiny software and write stories. Sit anywhere. Nobody else is on this train.</p>
-<nav class="jump" aria-label="On this page"><a href="#boop">Boop</a><a href="#odo">Odo</a><a href="#sprout">Sprout</a><a href="#stories">Stories</a><a href="#dayjob">Day job</a><a href="#underworld">Underworld</a><a href="#hello">Say hi</a></nav>
+<nav class="jump" aria-label="On this page"><a href="#boop">Boop</a><a href="#odo">Odo</a><a href="#sprout">Sprout</a><a href="#stories">Stories</a><a href="#writing">Writing</a><a href="#dayjob">Day job</a><a href="#underworld">Underworld</a><a href="#hello">Say hi</a></nav>
 </div>
 <div class="top-player">
 <div class="pv-frame pv-uw">
@@ -721,10 +746,38 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 </div>
 </section>
 
+<section class="work" id="writing">
+<div class="wrap work-grid">
+<div class="work-text">
+<p class="label"><span class="mv n">No. 5 · Served neat</span><span class="mv l">Log 05 · Letters in bottles</span><span class="mv t">Stop 5 · Writing</span></p>
+<h2>Writing</h2>
+<p class="tag">Short stories and essays, in two languages.</p>
+<p class="desc">Before the novel there were shorter things: stories about New York and the sea, and essays written as the seasons turned.</p>
+<div class="chips"><span class="chip js-wcount">15 pieces</span><span class="chip chip-zh" lang="zh-Hans">中文</span><span class="chip">English</span></div>
+<div class="links"><a class="btn" href="writing/">Read the writing →</a></div>
+</div>
+<div class="work-pv">
+<div class="pv-frame pv-index">
+<div class="ix-top"><span><span class="mv n">Tonight's reading</span><span class="mv l">Letters in bottles</span><span class="mv t">Departures</span></span><span>by SaltyMalty</span></div>
+<!-- writing:start (generated by tools/build_writing.py) -->
+<ol class="ix-list">
+<li><a href="writing/yet-another-summer/"><span class="ix-d">Jul 2024</span><span class="ix-t"><b>Yet Another Summer</b><i lang="zh-Hans">写在又一个夏天</i></span><span class="ix-k">Essay</span></a></li>
+<li><a href="writing/the-sea-where-only-you-exist/"><span class="ix-d">Mar 2024</span><span class="ix-t"><b>The Sea Where Only You Exist</b><i lang="zh-Hans">只有你存在的海</i></span><span class="ix-k">Story</span></a></li>
+<li><a href="writing/the-itch/"><span class="ix-d">Mar 2024</span><span class="ix-t"><b>The Itch</b><i lang="zh-Hans">痒</i></span><span class="ix-k">Story</span></a></li>
+<li><a href="writing/the-winter-surf-inn/"><span class="ix-d">Feb 2024</span><span class="ix-t"><b>The Winter Surf Inn</b><i lang="zh-Hans">冬日冲浪旅馆</i></span><span class="ix-k">Story</span></a></li>
+<li><a href="writing/a-lifetime-and-a-moment/"><span class="ix-d">Feb 2024</span><span class="ix-t"><b>A Lifetime and a Moment</b><i lang="zh-Hans">一生与一刻</i></span><span class="ix-k">Poem</span></a></li>
+</ol>
+<a class="ix-more" href="writing/">+ 10 more · Read all →</a>
+<!-- writing:end -->
+</div>
+</div>
+</div>
+</section>
+
 <section class="work" id="dayjob">
 <div class="wrap work-grid">
 <div class="work-text">
-<p class="label"><span class="mv n">No. 5 · The day shift</span><span class="mv l">Log 05 · The day shift</span><span class="mv t">Stop 5 · Day job</span></p>
+<p class="label"><span class="mv n">No. 6 · The day shift</span><span class="mv l">Log 06 · The day shift</span><span class="mv t">Stop 6 · Day job</span></p>
 <h2>Day job</h2>
 <p class="tag">Where I go while the pets are napping.</p>
 <p class="desc">I help a hedge fund manage risk better. Mostly I vibe code until the numbers behave.</p>
@@ -745,7 +798,7 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 <section class="work" id="underworld">
 <div class="wrap work-grid">
 <div class="work-text">
-<p class="label"><span class="mv n">Last call · Smoky and deep</span><span class="mv l">Log 06 · On the radio</span><span class="mv t">Last stop · Dark and long</span></p>
+<p class="label"><span class="mv n">Last call · Smoky and deep</span><span class="mv l">Log 07 · On the radio</span><span class="mv t">Last stop · Dark and long</span></p>
 <h2>Underworld</h2>
 <p class="tag">Always playing.</p>
 <p class="desc">The band I love. Down here it's electronic music, and mostly it's Underworld. My playlist is up top, or press play right here.</p>
