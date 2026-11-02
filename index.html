@@ -289,19 +289,6 @@ html[data-mode="train"] .ix-top span:first-child::before{content:"";display:inli
 .chip-zh{font-family:'Noto Serif SC','Songti SC','STSong','SimSun',serif;letter-spacing:.2em}
 @media (max-width:480px){.works .ix-list a{grid-template-columns:minmax(0,1fr) auto}.ix-d{grid-column:1/-1}}
 
-/* day job timeline */
-.timeline{list-style:none;margin:0;padding:0 0 0 8px;width:100%;max-width:520px}
-.timeline li{position:relative;padding:0 0 28px 30px;border-left:2px solid var(--line)}
-.timeline li:last-child{border-left-color:transparent;padding-bottom:0}
-.timeline li::before{content:"";position:absolute;left:-8px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--page);border:2px solid var(--dot)}
-.timeline li:first-child::before{background:var(--dot)}
-.timeline li:first-child::after{content:"";position:absolute;left:-8px;top:4px;width:10px;height:10px;border-radius:50%;border:2px solid var(--dot);animation:ring 2.4s ease-out infinite}
-@keyframes ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.6);opacity:0}}
-.yr{display:block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--label)}
-.timeline h3{margin:4px 0 0;font-family:var(--h-font);font-weight:var(--h-weight);text-transform:var(--h-case);letter-spacing:var(--h-track);font-size:clamp(24px,2.2vw,30px);line-height:1.15}
-.timeline .role{margin:2px 0 0;font-weight:700}
-.timeline .what{margin:2px 0 0;color:var(--muted)}
-
 /* underworld player */
 .pv-uw{background:var(--uw-bg);color:var(--uw-ink);padding:22px 22px 20px;display:flex;flex-direction:column;gap:16px}
 .uw-top{display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
@@ -784,14 +771,6 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 <p class="note">On the desk</p>
 <div class="chips"><span class="chip">Claude</span><span class="chip">Codex</span><span class="chip">Cursor</span><span class="chip">Python</span><span class="chip">SQL</span></div>
 </div>
-<div class="work-pv">
-<ol class="timeline">
-<li><span class="yr">2025 – now</span><h3>A hedge fund</h3><p class="role">Money helper, professional vibe coder</p><p class="what">I help them manage money better.</p></li>
-<li><span class="yr">2022 – 2025</span><h3>Blackstone</h3><p class="role">Analyst, then Associate</p><p class="what">Where I leveled up.</p></li>
-<li><span class="yr">2022</span><h3>Duke University</h3><p class="role">Master's</p><p class="what">Durham, North Carolina. The year before New York.</p></li>
-<li><span class="yr">2021</span><h3>UIBE, Beijing</h3><p class="role">Bachelor's</p><p class="what">University of International Business and Economics. Before that, growing up by the sea in Weihai.</p></li>
-</ol>
-</div>
 </div>
 </section>
 
@@ -824,7 +803,6 @@ html[data-mode="train"] .big-mail{letter-spacing:.04em}
 <h2>Say hi</h2>
 <p class="desc">Letters welcome.</p>
 <a class="big-mail" href="mailto:vivianqiao93@gmail.com">vivianqiao93@gmail.com</a>
-<div class="links"><a class="btn" href="https://www.instagram.com/realvivianqiao/" rel="noopener" target="_blank">Instagram @realvivianqiao</a><a class="btn" href="https://github.com/realvivianqiao">GitHub</a><a class="btn" href="https://getbooped.com">Boop</a></div>
 </div>
 </section>
 
