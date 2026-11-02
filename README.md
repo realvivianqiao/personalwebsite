@@ -7,7 +7,7 @@ The secret land of Vivian Qiao. A static site: `index.html` plus the Writing pag
 The essays and stories live as plain text in `content/writing/`:
 
 - `pieces.json` lists every piece: slug, Chinese and English titles, date, kind (`story`, `essay`, `poem`) and the original WeChat link.
-- `<slug>/zh.txt` is the Chinese original and `<slug>/en.txt` the English version. Paragraphs are separated by a blank line. `^ ` starts an epigraph (`^— ` for its attribution), `## 1` is a section break, `> ` lines are a quoted note, and `~ ` is a small closing line.
+- `<slug>/zh.txt` is the Chinese text and `<slug>/en.txt` the English text. Most pieces are Chinese only; To Evelyn, written in English, is English only. A piece with both files gets a 中文 / English switch on its page. Paragraphs are separated by a blank line. `^ ` starts an epigraph (`^— ` for its attribution), `## 1` is a section break, `> ` lines are a quoted note, and `~ ` is a small closing line.
 
 After editing any of those, regenerate the pages:
 

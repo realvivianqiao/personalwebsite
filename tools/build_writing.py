@@ -2,8 +2,9 @@
 """Build the Writing pages for vivianqiao.com.
 
 Source:  content/writing/pieces.json  (one entry per piece, newest first or any order)
-         content/writing/<slug>/zh.txt  (Chinese original, if there is one)
-         content/writing/<slug>/en.txt  (English version)
+         content/writing/<slug>/zh.txt  (Chinese text, if there is one)
+         content/writing/<slug>/en.txt  (English text, if there is one)
+         A piece with both shows a 中文 / English switch; a piece with one shows just that text.
 Output:  writing/index.html, writing/<slug>/index.html,
          the Writing preview on index.html (between the writing markers), sitemap.xml
 
@@ -306,13 +307,21 @@ def load():
         d = os.path.join(SRC, p['slug'])
         p['d'] = datetime.date.fromisoformat(p['date'])
         p['original'] = p.get('original', 'zh')
-        p['zh_text'] = open(os.path.join(d, 'zh.txt'), encoding='utf-8').read() if os.path.exists(os.path.join(d, 'zh.txt')) else None
-        p['en_text'] = open(os.path.join(d, 'en.txt'), encoding='utf-8').read()
+        read = lambda name: open(os.path.join(d, name), encoding='utf-8').read() if os.path.exists(os.path.join(d, name)) else None
+        p['zh_text'], p['en_text'] = read('zh.txt'), read('en.txt')
+        if not (p['zh_text'] or p['en_text']):
+            raise SystemExit('%s has neither zh.txt nor en.txt' % p['slug'])
+        # 'both' = Chinese and English with a switch, 'zh' = Chinese only, 'en' = English only
+        p['mode'] = 'both' if (p['zh_text'] and p['en_text']) else ('zh' if p['zh_text'] else 'en')
         verse = p.get('verse', False)
-        p['ex_en'] = excerpt(p['en_text'], 'en', verse)
-        p['ex_zh'] = excerpt(p['zh_text'], 'zh', verse) if p['zh_text'] else p['ex_en']
-        p['min_en'] = minutes(p['en_text'], 'en')
-        p['min_zh'] = minutes(p['zh_text'], 'zh') if p['zh_text'] else p['min_en']
+        p['ex_en'] = excerpt(p['en_text'], 'en', verse) if p['en_text'] else None
+        p['ex_zh'] = excerpt(p['zh_text'], 'zh', verse) if p['zh_text'] else None
+        p['min_en'] = minutes(p['en_text'], 'en') if p['en_text'] else None
+        p['min_zh'] = minutes(p['zh_text'], 'zh') if p['zh_text'] else None
+        p['ex_en'] = p['ex_en'] or p['ex_zh']
+        p['ex_zh'] = p['ex_zh'] or p['ex_en']
+        p['min_en'] = p['min_en'] or p['min_zh']
+        p['min_zh'] = p['min_zh'] or p['min_en']
     pieces.sort(key=lambda p: p['d'], reverse=True)
     return pieces
 
@@ -337,8 +346,14 @@ def build_piece(p, newer, older):
     k_en, k_zh = kind_line(p)
     label = both('%s · %s' % (k_en, date_en(p['d'])), '%s · %s' % (k_zh, date_zh(p['d'])))
     zh_orig = p['original'] == 'zh'
+    mode = p['mode']
+    zh_only = mode == 'zh'
 
-    if zh_orig:
+    if zh_only:
+        # Chinese text only: the Chinese title leads in either language, the English title sits under it.
+        h1 = '<h1 class="zh-t" lang="zh-Hans">%s</h1>' % esc(p['zh'])
+        sub = '<p class="art-sub" lang="en">%s</p>' % esc(p['en'])
+    elif mode == 'both' and zh_orig:
         h1 = (title_html(p, 'zh', 'h1', 'lz') + title_html(p, 'en', 'h1', 'le'))
         sub = ('<p class="art-sub lz">%s</p>' % esc(p['en']) +
                '<p class="art-sub le zh-t" lang="zh-Hans">%s</p>' % esc(p['zh']))
@@ -364,13 +379,20 @@ def build_piece(p, newer, older):
     else:
         wechat = ''
 
-    time_ = both('%d min read' % p['min_en'], '约 %d 分钟' % p['min_zh']) if zh_orig else '<span>%s</span>' % both('%d min read' % p['min_en'], '约 %d 分钟' % p['min_en'])
+    if mode == 'both':
+        time_ = both('%d min read' % p['min_en'], '约 %d 分钟' % p['min_zh'])
+    else:
+        m = p['min_zh'] if zh_only else p['min_en']
+        time_ = both('%d min read' % m, '约 %d 分钟' % m)
 
     facts = '<div class="facts"><span>%s</span>%s<span>%s</span></div>' % (time_, rev, wechat)
-    langbox = LANG if zh_orig else ''
+    langbox = LANG if mode == 'both' else ''
 
     vcls = ' verse' if verse else ''
-    if zh_orig:
+    if zh_only:
+        body = '<div class="prose zh%s" lang="zh-Hans">\n%s\n</div>' % (vcls, render(p['zh_text'], 'zh', verse))
+        swap = '<span></span>'
+    elif mode == 'both':
         body = ('<div class="prose zh lz%s" lang="zh-Hans">\n%s\n</div>\n' % (vcls, render(p['zh_text'], 'zh', verse)) +
                 '<div class="prose en le%s" lang="en">\n%s\n</div>' % (vcls, render(p['en_text'], 'en', verse)))
         swap = ('<button type="button" class="swap le" data-lang-set="zh" data-to-top lang="zh-Hans">阅读中文版 →</button>'
@@ -382,22 +404,27 @@ def build_piece(p, newer, older):
     def pn_link(q, cls, k_en, k_zh):
         if not q:
             return ''
-        t_en = esc(q['en'])
-        t_zh = esc(q['zh']) if q['original'] == 'zh' else t_en
+        if q['mode'] == 'zh':
+            t = '<span class="t zh-t" lang="zh-Hans">%s</span>' % esc(q['zh'])
+        else:
+            t_en = esc(q['en'])
+            t_zh = esc(q['zh']) if q['original'] == 'zh' else t_en
+            t = '<span class="t le">%s</span><span class="t lz zh-t" lang="zh-Hans">%s</span>' % (t_en, t_zh)
         return ('<a class="%s" href="../%s/"><span class="k">%s</span>%s</a>' %
-                (cls, q['slug'], both(k_en, k_zh),
-                 '<span class="t le">%s</span><span class="t lz zh-t" lang="zh-Hans">%s</span>' % (t_en, t_zh)))
+                (cls, q['slug'], both(k_en, k_zh), t))
     pn = '<nav class="pn" aria-label="More writing">%s%s</nav>' % (
         pn_link(newer, 'newer', '← Newer', '← 较新'), pn_link(older, 'older', 'Older →', '较早 →'))
 
     url = '%s/writing/%s/' % (SITE, p['slug'])
-    t_en = '%s · Vivian Qiao' % p['en']
     t_zh = '%s · Vivian Qiao' % (p['zh'] if zh_orig else p['en'])
-    desc = p['ex_en']
+    t_en = t_zh if zh_only else '%s · Vivian Qiao' % p['en']
+    desc = p['ex_zh'] if zh_only else p['ex_en']
+    langs = {'both': ['zh-Hans', 'en'], 'zh': 'zh-Hans', 'en': 'en'}[mode]
     ld = {
         '@context': 'https://schema.org', '@type': 'Article',
-        'headline': p['en'], 'alternativeHeadline': p['zh'] if zh_orig else None,
-        'datePublished': p['date'], 'inLanguage': ['zh-Hans', 'en'] if zh_orig else 'en',
+        'headline': p['zh'] if zh_only else p['en'],
+        'alternativeHeadline': p['en'] if zh_only else (p['zh'] if zh_orig else None),
+        'datePublished': p['date'], 'inLanguage': langs,
         'url': url, 'genre': KIND[p['kind']][0],
         'author': {'@type': 'Person', 'name': 'Vivian Qiao', 'alternateName': 'SaltyMalty', 'url': SITE + '/'},
     }
@@ -452,7 +479,10 @@ def build_archive(pieces):
                     (both(date_en(p['d']).replace(', %d' % y, ''), '%d月%d日' % (p['d'].month, p['d'].day)),
                      both(k_en.split(' ')[0], k_zh.split(' ')[0]),
                      both('%d min' % p['min_en'], '约 %d 分钟' % p['min_zh'])))
-            if zh_orig:
+            if p['mode'] == 'zh':
+                titles = ('<h3 class="e-title zh-t" lang="zh-Hans">%s</h3><p class="e-alt" lang="en">%s</p>' % (esc(p['zh']), esc(p['en'])))
+                ex = '<p class="e-ex zh-t" lang="zh-Hans">%s</p>' % esc(p['ex_zh'])
+            elif p['mode'] == 'both' and zh_orig:
                 titles = (title_html(p, 'zh', 'h3', 'e-title lz') + title_html(p, 'en', 'h3', 'e-title le') +
                           '<p class="e-alt lz">%s</p><p class="e-alt le zh-t" lang="zh-Hans">%s</p>' % (esc(p['en']), esc(p['zh'])))
                 ex = '<p class="e-ex lz zh-t" lang="zh-Hans">%s</p><p class="e-ex le">%s</p>' % (esc(p['ex_zh']), esc(p['ex_en']))
@@ -464,7 +494,9 @@ def build_archive(pieces):
 
     n_zh = sum(1 for p in pieces if p['original'] == 'zh')
     first, last = pieces[-1]['d'].year, pieces[0]['d'].year
-    intro_en = ('Short stories, essays and a couple of poems, written as SaltyMalty between %d and %d. ' % (first, last)) + moods(
+    n_zh_only = sum(1 for p in pieces if p['mode'] == 'zh')
+    in_zh = ', mostly in Chinese' if n_zh_only * 2 > len(pieces) else ''
+    intro_en = ('Short stories, essays and a couple of poems, written as SaltyMalty between %d and %d%s. ' % (first, last, in_zh)) + moods(
         'Pull up a stool.', 'Read them by the window.', 'Something for the long ride.')
     intro_zh = ('%d 至 %d 年间以 SaltyMalty 为笔名写下的小说、随笔和几首诗。' % (first, last)) + moods(
         '找个吧台位坐下吧。', '就着窗边的光慢慢读。', '留给漫长的夜车。')
